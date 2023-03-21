@@ -22,7 +22,7 @@ public class AplicacaoApplication {
 		// 2. Configuração para trocar de porta.
 		// Nesta configuração você pode escolher a porta que o servidor web será executado.
 		// Por padrão a porta é 8080
-		configuracao.put("server.port", "8080"); // seleção da porta
+		configuracao.put("server.port", "9080"); // seleção da porta
 
 		// 3. Configurações do banco de dados mysql
 		// 3.1 A URL de conexão é o caminho onde spring irá tentar conectar com o banco.
