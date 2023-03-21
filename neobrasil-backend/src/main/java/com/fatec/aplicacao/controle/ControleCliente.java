@@ -2,6 +2,7 @@ package com.fatec.aplicacao.controle;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,5 +32,12 @@ public class ControleCliente {
 	public Cliente obterCliente(@PathVariable long id) {
 		List<Cliente> clientes = repositorio.findAll();
 		return Selecionador.selecionarCliente(clientes, id);
+	}
+	
+	@SuppressWarnings("deprecation")
+	@DeleteMapping("/excluir/cliente")
+	public void excluirCliente(@RequestBody Cliente exclusao) {
+		Cliente cliente = repositorio.getById(exclusao.getId());
+		repositorio.delete(cliente);
 	}
 }
