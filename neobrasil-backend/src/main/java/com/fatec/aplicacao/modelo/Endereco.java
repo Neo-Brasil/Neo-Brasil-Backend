@@ -12,7 +12,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Endereço {
+public class Endereco {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "endereco_id")

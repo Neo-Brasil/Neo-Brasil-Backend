@@ -1,5 +1,5 @@
 package com.fatec.aplicacao.modelo;
 
-public class Prestações {
+public class Prestacoes {
 
 }
