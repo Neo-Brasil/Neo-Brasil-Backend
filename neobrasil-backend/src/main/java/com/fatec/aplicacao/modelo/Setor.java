@@ -1,6 +1,5 @@
 package com.fatec.aplicacao.modelo;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,16 +9,11 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Usuario {
+public class Setor {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "usuario_id")
+	@Column(name = "titulo_id")
 	private Long id;
 	@Column
-	private String nome;
-	@Column
-	private String email;
-	@Column
-	private int senha;
-	
+	private String setor;
 }
