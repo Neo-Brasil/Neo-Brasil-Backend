@@ -5,7 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
 @Data
@@ -27,6 +27,6 @@ public class Endereco {
 	private String complemento;
 	@Column
 	private int UF;
-	@OneToOne(cascade = jakarta.persistence.CascadeType.ALL, orphanRemoval = true)
-    private int cliente;
+	@ManyToOne
+    private Cliente cliente;
 }
