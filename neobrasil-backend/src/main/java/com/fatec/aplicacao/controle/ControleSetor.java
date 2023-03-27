@@ -9,34 +9,34 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fatec.aplicacao.modelo.Usuario;
+import com.fatec.aplicacao.modelo.Setor;
 import com.fatec.aplicacao.recursos.Selecionador;
-import com.fatec.aplicacao.repositorio.RepositorioUsuario;
+import com.fatec.aplicacao.repositorio.RepositorioSetor;
 
 @RestController
-public class ControleUsuario {
+public class ControleSetor {
 	
 	@Autowired
-	private RepositorioUsuario repositorio;
+	private RepositorioSetor repositorio;
 	
-	@PostMapping("/cadastro/usuario")
-	public void cadastrar(@RequestBody Usuario novoUsuario) {
-		repositorio.save(novoUsuario);
+	@PostMapping("/cadastro/setor")
+	public void cadastrar(@RequestBody Setor novoSetor) {
+		repositorio.save(novoSetor);
 	}
-	@GetMapping("/listagem/usuarios")
-	public List<Usuario> obterUsuario(){
-		List<Usuario> usuarios = repositorio.findAll();
-		return usuarios;
+	@GetMapping("/listagem/setor")
+	public List<Setor> obterSetor(){
+		List<Setor> setores = repositorio.findAll();
+		return setores;
 	}
-	@GetMapping("/selecionar/usuario/{id}")
-	public Usuario obterUsuario(@PathVariable long id) {
-		List<Usuario> usuarios = repositorio.findAll();
-		return Selecionador.selecionarUsuario(usuarios, id);
+	@GetMapping("/selecionar/setor/{id}")
+	public Setor obterSetor(@PathVariable long id) {
+		List<Setor> setores = repositorio.findAll();
+		return Selecionador.selecionarSetor(setores, id);
 	}
 	@SuppressWarnings("deprecation")
-	@DeleteMapping("/excluir/usuario")
-	public void excluirCliente(@RequestBody Usuario exclusao) {
-		Usuario usuario = repositorio.getById(exclusao.getId());
-		repositorio.delete(usuario);
+	@DeleteMapping("/excluir/setor")
+	public void excluirCliente(@RequestBody Setor exclusao) {
+		Setor setor = repositorio.getById(exclusao.getId());
+		repositorio.delete(setor);
 	}
 }

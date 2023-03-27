@@ -9,34 +9,34 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fatec.aplicacao.modelo.Usuario;
+import com.fatec.aplicacao.modelo.Titulos;
 import com.fatec.aplicacao.recursos.Selecionador;
-import com.fatec.aplicacao.repositorio.RepositorioUsuario;
+import com.fatec.aplicacao.repositorio.RepositorioTitulos;
 
 @RestController
-public class ControleUsuario {
+public class ControleTitulos {
 	
 	@Autowired
-	private RepositorioUsuario repositorio;
+	private RepositorioTitulos repositorio;
 	
-	@PostMapping("/cadastro/usuario")
-	public void cadastrar(@RequestBody Usuario novoUsuario) {
-		repositorio.save(novoUsuario);
+	@PostMapping("/cadastro/titulos")
+	public void cadastrar(@RequestBody Titulos novoTitulos) {
+		repositorio.save(novoTitulos);
 	}
-	@GetMapping("/listagem/usuarios")
-	public List<Usuario> obterUsuario(){
-		List<Usuario> usuarios = repositorio.findAll();
-		return usuarios;
+	@GetMapping("/listagem/titulos")
+	public List<Titulos> obterUsuario(){
+		List<Titulos> titulos = repositorio.findAll();
+		return titulos;
 	}
-	@GetMapping("/selecionar/usuario/{id}")
-	public Usuario obterUsuario(@PathVariable long id) {
-		List<Usuario> usuarios = repositorio.findAll();
-		return Selecionador.selecionarUsuario(usuarios, id);
+	@GetMapping("/selecionar/titulos/{id}")
+	public Titulos obterTitulos(@PathVariable long id) {
+		List<Titulos> titulos = repositorio.findAll();
+		return Selecionador.selecionarTitulos(titulos, id);
 	}
 	@SuppressWarnings("deprecation")
-	@DeleteMapping("/excluir/usuario")
-	public void excluirCliente(@RequestBody Usuario exclusao) {
-		Usuario usuario = repositorio.getById(exclusao.getId());
-		repositorio.delete(usuario);
+	@DeleteMapping("/excluir/titulos")
+	public void excluirCliente(@RequestBody Titulos exclusao) {
+		Titulos titulos = repositorio.getById(exclusao.getId());
+		repositorio.delete(titulos);
 	}
 }

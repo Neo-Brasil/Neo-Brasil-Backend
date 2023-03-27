@@ -27,8 +27,8 @@ public class Endereco {
 	@Column
 	private String complemento;
 	@Column
-	private int UF;
-	@ManyToOne
-	@JoinColumn(nullable = false)
+	private String UF;
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "cliente_id", referencedColumnName = "id", nullable = false)
     private Cliente cliente;
 }
