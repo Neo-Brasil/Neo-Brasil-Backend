@@ -24,7 +24,7 @@ public class Usuario {
 	@Column
 	private int senha;
 	@ManyToOne
-	@JoinColumn(nullable = false)
+	@JoinColumn//(nullable = false)
 	private Setor setor;
 	
 }

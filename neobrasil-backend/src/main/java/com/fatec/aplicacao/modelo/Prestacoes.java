@@ -21,9 +21,9 @@ public class Prestacoes {
 	@Column
 	private String situacao;
 	@ManyToOne
-	@JoinColumn(nullable = false)
+	@JoinColumn//(nullable = false)
 	private Titulos titulo;
 	@ManyToOne
-	@JoinColumn(nullable = false)
+	@JoinColumn//(nullable = false)
 	private Cliente cliente;
 }
