@@ -22,6 +22,17 @@ public class Selecionador {
 		}
 		return selecionado;
 	}
+	
+	public static Long findCliente(List<Cliente> clientes, String cpf) {
+		Long selecionado = null;
+		for (Cliente cliente : clientes) {
+			if (cliente.getCpf() == cpf) {
+				selecionado = cliente.getId();
+			}
+		}
+		return selecionado;
+	}
+	
 	public static Usuario selecionarUsuario(List<Usuario> usuarios, long id) {
 		Usuario selecionado = null;
 		for (Usuario usuario : usuarios) {
