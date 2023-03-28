@@ -19,4 +19,12 @@ public class Titulos {
 	private String titulo;
 	@Column
 	private int preco;
+	@Column
+	private String data;
+	@Column
+	private String credito;
+	@Column
+	private String situacao;
+	@Column//(nullable = false)
+	private long cliente;
 }
