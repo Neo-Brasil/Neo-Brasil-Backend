@@ -13,6 +13,7 @@ import com.fatec.aplicacao.recursos.Selecionador;
 import com.fatec.aplicacao.repositorio.RepositorioCliente;
 
 @RestController
+@CrossOrigin
 public class ControleCliente {
 	
 	@Autowired
