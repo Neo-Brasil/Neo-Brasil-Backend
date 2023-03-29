@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import com.fatec.aplicacao.modelo.Cliente;
 import com.fatec.aplicacao.modelo.Endereco;
+import com.fatec.aplicacao.modelo.Pacote;
 import com.fatec.aplicacao.modelo.Titulos;
 import com.fatec.aplicacao.recursos.Selecionador;
 import com.fatec.aplicacao.repositorio.RepositorioCliente;
@@ -33,17 +34,11 @@ public class ControleCliente {
 	private RepositorioTitulos repositorioTitulos;
 
 	@PostMapping("/cadastro/cliente")
-	public void cadastrar(@RequestBody Object novoCliente) {
-		Cliente cliente = novoCliente.getValue("cliente");
+	public void cadastrar(@RequestBody Pacote pacote) {
+		Cliente cliente = pacote.getCliente();
+		Titulos titulo = pacote.getTitulos();
+		Endereco endereco = pacote.getEndereco();
 		repositorioCliente.save(cliente);
-		List<Cliente> clientes = repositorioCliente.findAll();
-		long cliente_id = Selecionador.findCliente(clientes, cliente.getCpf());
-		Endereco endereco = novoCliente.getValue("endereco");
-		endereco.setCliente(cliente_id);
-		repositorioEndereco.save(endereco);
-		Titulos titulo = novoCliente.getValue("titulo");
-		titulo.setCliente(cliente_id);
-		repositorioTitulos.save(titulo);
 	}
 	@GetMapping("/listagem/clientes")
 	public List<Cliente> obterClientes(){
