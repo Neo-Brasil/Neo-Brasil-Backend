@@ -5,21 +5,20 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @Entity
 public class Endereco {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "endereco_id")
-	private Long id;
+	@EqualsAndHashCode.Include
+	private Long Id;
 	@Column
 	private String cep;
 	@Column
-	private String logadouro;
+	private String logradouro;
 	@Column
 	private String bairro;
 	@Column
@@ -28,6 +27,6 @@ public class Endereco {
 	private String complemento;
 	@Column
 	private String UF;
-	@Column(unique = true)
-    private long cliente;
+	
+	
 }
