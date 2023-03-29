@@ -20,9 +20,11 @@ public class Titulos {
 	@Column
 	private int preco;
 	@Column
-	private String data;
+	private String data_vencimento;
 	@Column
-	private String credito;
+	private String data_pagamento;
+	@Column
+	private String tempo_credito;
 	@Column
 	private String situacao;
 	@Column//(nullable = false)
