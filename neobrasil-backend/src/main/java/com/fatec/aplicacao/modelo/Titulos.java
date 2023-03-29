@@ -7,14 +7,20 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 @Data
 @Entity
+@Getter
+@Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Titulos {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "titulo_id")
-	private Long id;
+	@EqualsAndHashCode.Include
+	private Long Id;
 	@Column
 	private String titulo;
 	@Column
@@ -24,9 +30,7 @@ public class Titulos {
 	@Column
 	private String data_pagamento;
 	@Column
-	private String tempo_credito;
+	private int tempo_credito;
 	@Column
 	private String situacao;
-	@Column//(nullable = false)
-	private long cliente;
 }

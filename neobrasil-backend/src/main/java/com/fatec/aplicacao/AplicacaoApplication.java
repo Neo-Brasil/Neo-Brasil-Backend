@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.fatec.aplicacao.modelo.Cliente;
 import com.fatec.aplicacao.modelo.Endereco;
+import com.fatec.aplicacao.modelo.Titulos;
 import com.fatec.aplicacao.repositorio.RepositorioCliente;
 
 @SpringBootApplication
@@ -49,7 +50,16 @@ public class AplicacaoApplication implements CommandLineRunner {
 			end.setComplemento("Rua que tem algumas avenidas");
 			end.setUF("SE");
 			
+			Titulos tit = new Titulos();
+			tit.setTitulo("Gold");
+			tit.setPreco(900);
+			tit.setData_vencimento("12/03/2023");
+			tit.setData_pagamento("09/03/2023");
+			tit.setTempo_credito(5);
+			tit.setSituacao("Pago");
+			
 			cliente.setEndereco(end);
+			cliente.getTitulos().add(tit);
 			repositorio.save(cliente);
 	}
 
