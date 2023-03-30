@@ -39,9 +39,9 @@ public class ControleCliente {
 	}
 	
 	@SuppressWarnings("deprecation")
-	@DeleteMapping("/excluir/cliente")
-	public void excluirCliente(@RequestBody Cliente exclusao) {
-		Cliente cliente = repositorio.getById(exclusao.getId());
+	@DeleteMapping("/excluir/cliente/{id}")
+	public void excluirCliente(@PathVariable long id) {
+		Cliente cliente = repositorio.getById(id);
 		repositorio.delete(cliente);
 	}
 }
