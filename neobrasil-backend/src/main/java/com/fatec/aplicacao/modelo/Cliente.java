@@ -1,9 +1,8 @@
 package com.fatec.aplicacao.modelo;
 
 
-import java.util.HashSet;
-import java.util.Set;
-
+import java.util.List;
+import java.util.ArrayList;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -37,7 +36,6 @@ public class Cliente {
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	private Endereco endereco;
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-	private Set<Titulos> titulos = new HashSet<>();
-
+	private List<Titulos> titulos = new ArrayList<>();
 
 }

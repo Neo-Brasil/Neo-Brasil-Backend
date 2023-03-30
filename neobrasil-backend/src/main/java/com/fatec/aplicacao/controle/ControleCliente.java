@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.fatec.aplicacao.modelo.Cliente;
+import com.fatec.aplicacao.recursos.ClienteAtualizador;
 import com.fatec.aplicacao.recursos.Selecionador;
 import com.fatec.aplicacao.repositorio.RepositorioCliente;
 
@@ -36,6 +38,15 @@ public class ControleCliente {
 	public Cliente obterCliente(@PathVariable long id) {
 		List<Cliente> clientes = repositorio.findAll();
 		return Selecionador.selecionarCliente(clientes, id);
+	}
+	
+	@SuppressWarnings("deprecation")
+	@PutMapping("/atualizar")
+	public void atualizarCliente(@RequestBody Cliente atualizacao) {
+		Cliente cliente = repositorio.getById(atualizacao.getId());
+		ClienteAtualizador atualizador = new ClienteAtualizador();
+		atualizador.atualizar(cliente, atualizacao);
+		repositorio.save(cliente);
 	}
 	
 	@SuppressWarnings("deprecation")
