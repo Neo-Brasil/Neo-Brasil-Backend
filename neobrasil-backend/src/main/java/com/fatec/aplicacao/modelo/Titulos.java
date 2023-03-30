@@ -26,6 +26,8 @@ public class Titulos {
 	@Column
 	private int preco;
 	@Column
+	private int ultimo_valor_pago;
+	@Column
 	private String data_vencimento;
 	@Column
 	private String data_pagamento;

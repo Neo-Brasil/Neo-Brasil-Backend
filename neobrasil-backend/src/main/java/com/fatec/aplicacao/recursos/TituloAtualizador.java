@@ -19,6 +19,7 @@ public class TituloAtualizador {
 			if (!verificador.verificar(atualizacao.getTitulo())) {
 				titulo.setTitulo(atualizacao.getTitulo());
 			}
+			titulo.setUltimo_valor_pago(atualizacao.getUltimo_valor_pago());
 		}
 	}
 }
