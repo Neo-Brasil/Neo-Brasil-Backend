@@ -53,10 +53,10 @@ public class AplicacaoApplication implements CommandLineRunner {
 			Titulos tit = new Titulos();
 			tit.setTitulo("Gold");
 			tit.setPreco(900);
-			tit.setData_vencimento("12/03/2023");
-			tit.setData_pagamento("09/03/2023");
+			tit.setData_vencimento("2023-03-07");
+			tit.setData_pagamento("2023-09-03");
 			tit.setTempo_credito(5);
-			tit.setSituacao("Pago");
+			tit.setSituacao("");
 			
 			cliente.setEndereco(end);
 			cliente.getTitulos().add(tit);

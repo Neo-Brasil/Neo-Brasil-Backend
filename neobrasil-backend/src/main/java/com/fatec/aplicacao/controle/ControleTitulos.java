@@ -44,9 +44,9 @@ public class ControleTitulos {
 			List<Titulos> titulos = cliente.getTitulos();
 			for (Titulos titulo : titulos) {
 				if ( !titulo.getSituacao().equalsIgnoreCase("Pago")) {
-					int data_vencimento = Integer.parseInt(titulo.getData_vencimento().replace("/", ""));
-					if (data_vencimento < data_atual) {
-						titulo.setSituacao("Atrasado");
+					int data_vencimento = Integer.parseInt(titulo.getData_vencimento().replace("-", ""));
+					if (data_vencimento <= data_atual) {
+						titulo.setSituacao("Inadimplente");
 						}
 					}
 				}
