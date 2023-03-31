@@ -48,6 +48,10 @@ public class ControleTitulos {
 					if (data_vencimento <= data_atual) {
 						titulo.setSituacao("Inadimplente");
 						}
+					} else if (
+						Integer.parseInt(titulo.getData_pagamento().replace("-", "")) +
+						titulo.getTempo_credito() <= data_atual) {
+						titulo.setSituacao("Creditado");
 					}
 				}
 			}
