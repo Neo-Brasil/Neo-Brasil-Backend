@@ -37,7 +37,7 @@ public class AplicacaoApplication implements CommandLineRunner {
 		@Override
 		public void run(String... args) throws Exception {
 			Cliente cliente = new Cliente();
-			cliente.setNome("Luquinha");
+			cliente.setNome("Lucas");
 			cliente.setCpf("077056452");
 			cliente.setEmail("luquinhagenial@gmail.com");
 			
@@ -56,7 +56,111 @@ public class AplicacaoApplication implements CommandLineRunner {
 			tit.setData_vencimento("2023-03-07");
 			tit.setData_pagamento("2023-09-03");
 			tit.setTempo_credito(5);
-			tit.setSituacao("");
+			tit.setSituacao("Em aberto");
+			
+			cliente.setEndereco(end);
+			cliente.getTitulos().add(tit);
+			repositorio.save(cliente);
+			
+			
+			cliente = new Cliente();
+			cliente.setNome("Julio");
+			cliente.setCpf("077056452");
+			cliente.setEmail("Julio@gmail.com");
+			
+			
+			end = new Endereco();
+			end.setCep("12345678910");
+			end.setLogradouro("Avenida dos bairros");
+			end.setBairro("Bairro das Avenidas");
+			end.setLocalidade("Bairrinho");
+			end.setComplemento("Rua que tem algumas avenidas");
+			end.setUF("SE");
+			
+			tit = new Titulos();
+			tit.setTitulo("Gold");
+			tit.setPreco(500);
+			tit.setData_vencimento("2023-03-07");
+			tit.setData_pagamento("2023-09-03");
+			tit.setTempo_credito(2);
+			tit.setSituacao("Em aberto");
+			
+			cliente.setEndereco(end);
+			cliente.getTitulos().add(tit);
+			repositorio.save(cliente);
+			
+			cliente = new Cliente();
+			cliente.setNome("Amanda");
+			cliente.setCpf("077056452");
+			cliente.setEmail("Amanda@gmail.com");
+			
+			
+			end = new Endereco();
+			end.setCep("12345678910");
+			end.setLogradouro("Avenida dos bairros");
+			end.setBairro("Bairro das Avenidas");
+			end.setLocalidade("Bairrinho");
+			end.setComplemento("Rua que tem algumas avenidas");
+			end.setUF("SE");
+			
+			tit = new Titulos();
+			tit.setTitulo("Gold");
+			tit.setPreco(700);
+			tit.setData_vencimento("2023-03-07");
+			tit.setData_pagamento("2023-09-03");
+			tit.setTempo_credito(4);
+			tit.setSituacao("Em aberto");
+			
+			cliente.setEndereco(end);
+			cliente.getTitulos().add(tit);
+			repositorio.save(cliente);
+			
+			cliente = new Cliente();
+			cliente.setNome("Julia");
+			cliente.setCpf("077056452");
+			cliente.setEmail("Julia@gmail.com");
+			
+			
+			end = new Endereco();
+			end.setCep("12345678910");
+			end.setLogradouro("Avenida dos bairros");
+			end.setBairro("Bairro das Avenidas");
+			end.setLocalidade("Bairrinho");
+			end.setComplemento("Rua que tem algumas avenidas");
+			end.setUF("SE");
+			
+			tit = new Titulos();
+			tit.setTitulo("Gold");
+			tit.setPreco(1000);
+			tit.setData_vencimento("2023-03-07");
+			tit.setData_pagamento("2023-09-03");
+			tit.setTempo_credito(2);
+			tit.setSituacao("Em aberto");
+			
+			cliente.setEndereco(end);
+			cliente.getTitulos().add(tit);
+			repositorio.save(cliente);
+			
+			cliente = new Cliente();
+			cliente.setNome("Carlos");
+			cliente.setCpf("077056452");
+			cliente.setEmail("Carlos@gmail.com");
+			
+			
+			end = new Endereco();
+			end.setCep("12345678910");
+			end.setLogradouro("Avenida dos bairros");
+			end.setBairro("Bairro das Avenidas");
+			end.setLocalidade("Bairrinho");
+			end.setComplemento("Rua que tem algumas avenidas");
+			end.setUF("SE");
+			
+			tit = new Titulos();
+			tit.setTitulo("Gold");
+			tit.setPreco(1000);
+			tit.setData_vencimento("2023-04-08");
+			tit.setTempo_credito(2);
+			tit.setSituacao("Em aberto");
 			
 			cliente.setEndereco(end);
 			cliente.getTitulos().add(tit);
