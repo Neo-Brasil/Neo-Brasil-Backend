@@ -23,6 +23,13 @@ public class ControleUsuario {
 	public void cadastrar(@RequestBody Usuario novoUsuario) {
 		repositorio.save(novoUsuario);
 	}
+	
+	@PostMapping("/checagem/usuario")
+	public boolean checagem(@RequestBody Usuario novoUsuario) {
+		List<Usuario> usuarios = repositorio.findAll();
+		return Selecionador.checarUsuario(usuarios, novoUsuario.getEmail(), novoUsuario.getSenha());
+	}
+	
 	@GetMapping("/listagem/usuarios")
 	public List<Usuario> obterUsuario(){
 		List<Usuario> usuarios = repositorio.findAll();

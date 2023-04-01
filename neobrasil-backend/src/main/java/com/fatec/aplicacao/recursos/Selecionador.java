@@ -41,6 +41,18 @@ public class Selecionador {
 		}
 		return selecionado;
 	}
+	
+	public static boolean checarUsuario(List<Usuario> usuarios, String email, String senha) {
+		Usuario selecionado = null;
+		for (Usuario usuario : usuarios) {
+			if (usuario.getEmail().equals(email) && usuario.getSenha().equals(senha)) {
+				selecionado = usuario;
+				break;
+			}
+		}
+		return selecionado != null;
+	}
+	
 	public static Endereco selecionarEndereco(List<Endereco> enderecos, long id) {
 		Endereco selecionado = null;
 		for (Endereco endereco : enderecos) {

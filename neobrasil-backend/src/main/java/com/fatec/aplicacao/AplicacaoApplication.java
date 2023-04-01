@@ -11,14 +11,18 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.fatec.aplicacao.modelo.Cliente;
 import com.fatec.aplicacao.modelo.Endereco;
 import com.fatec.aplicacao.modelo.Titulos;
+import com.fatec.aplicacao.modelo.Usuario;
 import com.fatec.aplicacao.repositorio.RepositorioCliente;
+import com.fatec.aplicacao.repositorio.RepositorioUsuario;
 
 @SpringBootApplication
 public class AplicacaoApplication implements CommandLineRunner {
 	
 	@Autowired
 	public RepositorioCliente repositorio;
-
+	@Autowired
+	public RepositorioUsuario repositorioUsuario;
+	
 	public static void main(String[] args) {
 		
 		Map<String, Object> configuracao = new HashMap<>();
@@ -165,6 +169,11 @@ public class AplicacaoApplication implements CommandLineRunner {
 			cliente.setEndereco(end);
 			cliente.getTitulos().add(tit);
 			repositorio.save(cliente);
+			
+			Usuario usuario = new Usuario();
+			usuario.setEmail("administrador@adm.com");
+			usuario.setSenha("fatec");
+			repositorioUsuario.save(usuario);
 	}
 
 }
