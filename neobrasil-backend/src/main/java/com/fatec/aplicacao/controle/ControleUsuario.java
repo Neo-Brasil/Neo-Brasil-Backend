@@ -2,6 +2,7 @@ package com.fatec.aplicacao.controle;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import com.fatec.aplicacao.recursos.Selecionador;
 import com.fatec.aplicacao.repositorio.RepositorioUsuario;
 
 @RestController
+@CrossOrigin
 public class ControleUsuario {
 	
 	@Autowired
