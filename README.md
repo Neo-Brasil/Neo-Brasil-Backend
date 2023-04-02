@@ -1,5 +1,7 @@
 <div align="center" id="menu">
-<h1> Neo Brasil Back-end </h1>
+
+![NEOBRASIL](https://user-images.githubusercontent.com/101027809/229372651-647d222e-8a74-4500-abb3-48f8e1781c22.png)
+
 </div>
 
 <br>
@@ -24,19 +26,17 @@
 
 
 
-- Abra a pasta neobrasil-backend  e configure os dados do seu banco de dados nos seguintes arquivos AplicacaoApplication e Application.properties
+- Abra a pasta neobrasil-backend  e configure os dados do seu banco de dados nos arquivos AplicacaoApplication e Application.properties
 
-  
+   ![aplicacaoaplication](https://user-images.githubusercontent.com/101027809/229372657-56edcc66-1a00-4591-a401-14d0a4f9e5a1.png)
 
-  ![aplicacaoaplication](C:\Users\julia\OneDrive\Área de Trabalho\aplicacaoaplication.png)
-
-  ![applicationproperties](C:\Users\julia\OneDrive\Área de Trabalho\applicationproperties.png)
-
-  
+   ![applicationproperties](https://user-images.githubusercontent.com/101027809/229372662-34f8ac1d-f3a3-4adf-9085-844d2d794dd6.png)
+ 
 
 - Execute os seguintes comandos no MySQL Workbench:
 
-  ![mysql](C:\Users\julia\OneDrive\Área de Trabalho\mysql.png)
+  ![mysql](https://user-images.githubusercontent.com/101027809/229372701-fabb64af-5456-4f70-9e22-1f209373dac1.png)
+
 
 - Execute o arquivo AplicacaoAplication.java 
 
