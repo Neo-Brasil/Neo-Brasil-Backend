@@ -27,10 +27,11 @@
 
 
 - Abra a pasta neobrasil-backend  e configure os dados do seu banco de dados nos arquivos AplicacaoApplication e Application.properties
+<br>
 
-   ![aplicacaoaplication](https://user-images.githubusercontent.com/101027809/229372657-56edcc66-1a00-4591-a401-14d0a4f9e5a1.png)
-
-   ![applicationproperties](https://user-images.githubusercontent.com/101027809/229372662-34f8ac1d-f3a3-4adf-9085-844d2d794dd6.png)
+   ![aplication](https://user-images.githubusercontent.com/101027809/230613921-e8d4269e-dff9-48c3-a3f1-d8ad711d39e6.png)
+   
+   ![properties](https://user-images.githubusercontent.com/101027809/230612840-f10ed34c-bba6-4405-9177-74535d845d73.png)
  
 
 - Execute os seguintes comandos no MySQL Workbench:
