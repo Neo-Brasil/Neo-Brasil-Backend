@@ -17,7 +17,7 @@ import com.fatec.aplicacao.modelo.Cliente;
 import com.fatec.aplicacao.modelo.Prestacao;
 import com.fatec.aplicacao.modelo.Titulos;
 import com.fatec.aplicacao.recursos.ClienteAtualizador;
-import com.fatec.aplicacao.recursos.DataAdd;
+import com.fatec.aplicacao.recursos.DataManipulacao;
 import com.fatec.aplicacao.recursos.Selecionador;
 import com.fatec.aplicacao.repositorio.RepositorioCliente;
 import com.fatec.aplicacao.repositorio.RepositorioTitulos;
@@ -33,19 +33,17 @@ public class ControleCliente {
 	@Autowired
 	private RepositorioTitulos repositorioTitulos;
 
-	@SuppressWarnings("null")
 	@PostMapping("/cadastro/cliente")
 	public void cadastrar(@RequestBody Cliente novoCliente) throws ParseException {
 		List<Titulos> titulos = novoCliente.getTitulos();
 		String data_atual = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")).replace("/", "-");
 		for (Titulos titulo : titulos) {
 			List<Prestacao> prestacoes = titulo.getPrestacoes();
-			String data_vencimento = DataAdd.AdicionarDias(data_atual, 30);
+			List<String> listaDatas = DataManipulacao.CriarDatas(data_atual);
 			for (int i = 0; i < 12; i++) {
 				Prestacao prestacao = new Prestacao();
+				prestacao.setData_vencimento(listaDatas.get(i));
 				prestacao.setPreco(titulo.getPreco()/12);
-				prestacao.setData_vencimento(data_vencimento);
-				DataAdd.AdicionarDias(data_vencimento, 30);
 				prestacoes.add(prestacao);
 			}
 		}
