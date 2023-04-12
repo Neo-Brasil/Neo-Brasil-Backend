@@ -1,9 +1,9 @@
 package com.fatec.aplicacao.recursos;
 
 public class IntVerificadorNulo {
-	public boolean verificar(Integer dado) {
+	public boolean verificar(float f) {
 		boolean nulo = true;
-		if (!(dado == 0)) {
+		if (!(f == 0)) {
 			nulo = false;
 		}
 		return nulo;
