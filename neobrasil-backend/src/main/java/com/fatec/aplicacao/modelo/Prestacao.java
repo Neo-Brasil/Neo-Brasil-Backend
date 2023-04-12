@@ -26,6 +26,6 @@ public class Prestacao {
 	@Column
 	private String data_pagamento;
 	@Column
-	private int preco;
+	private float preco;
 	
 }

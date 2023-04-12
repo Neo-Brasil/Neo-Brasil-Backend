@@ -30,7 +30,7 @@ public class Titulos {
 	@Column
 	private String titulo;
 	@Column
-	private int preco;
+	private float preco;
 	@Column
 	private int ultimo_valor_pago;
 	@Column
