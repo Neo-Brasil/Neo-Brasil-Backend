@@ -15,7 +15,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import com.fatec.aplicacao.modelo.Cliente;
+import com.fatec.aplicacao.modelo.Prestacao;
 import com.fatec.aplicacao.modelo.Titulos;
+import com.fatec.aplicacao.recursos.AtualizadorSituacao;
 import com.fatec.aplicacao.recursos.Selecionador;
 import com.fatec.aplicacao.recursos.TituloAtualizador;
 import com.fatec.aplicacao.repositorio.RepositorioCliente;
@@ -43,7 +45,12 @@ public class ControleTitulos {
 		for (Cliente cliente : clientes ) {
 			List<Titulos> titulos = cliente.getTitulos();
 			for (Titulos titulo : titulos) {
-				if ( !titulo.getSituacao().equalsIgnoreCase("Pago")) {
+				AtualizadorSituacao.atualizarTituloPrestacoes(titulo, data_atual);
+			}
+		}
+		return clientes;
+		}
+				/*if ( !titulo.getSituacao().equalsIgnoreCase("Pago")) {
 					int data_vencimento = Integer.parseInt(titulo.getData_vencimento().replace("-", ""));
 					if (data_vencimento <= data_atual) {
 						titulo.setSituacao("Inadimplente");
@@ -54,9 +61,18 @@ public class ControleTitulos {
 						titulo.setSituacao("Creditado");
 					}
 				}
-			}
-		return clientes;
+			}*/
+		
+	
+	/*@GetMapping("/atualizar/titulo_prestacoes/{id}")
+	public Titulos atualizarTituloPrestacoes(@PathVariable long id) {
+		List<Titulos> titulos = repositorioTitulos.findAll();
+		Titulos titulo = Selecionador.selecionarTitulos(titulos, id);
+		for (Prestacao prestacao: titulo.getPrestacoes()) {
+			
 		}
+	}*/
+
 	
 	@GetMapping("/listagem/titulos")
 	public List<Titulos> obterListaTitulos(){
@@ -71,7 +87,7 @@ public class ControleTitulos {
 	}
 	@SuppressWarnings("deprecation")
 	@PutMapping("/atualizar/titulo")
-	public void atualizarCliente(@RequestBody Titulos atualizacao) {
+	public void atualizarTitulo(@RequestBody Titulos atualizacao) {
 		Titulos titulo = repositorioTitulos.getById(atualizacao.getId());
 		TituloAtualizador atualizador = new TituloAtualizador();
 		atualizador.atualizar(titulo, atualizacao);
@@ -79,7 +95,7 @@ public class ControleTitulos {
 	}
 	@SuppressWarnings("deprecation")
 	@DeleteMapping("/excluir/titulos")
-	public void excluirCliente(@RequestBody Titulos exclusao) {
+	public void excluirTitulo(@RequestBody Titulos exclusao) {
 		Titulos titulos = repositorioTitulos.getById(exclusao.getId());
 		repositorioTitulos.delete(titulos);
 	}
