@@ -21,7 +21,7 @@ import com.fatec.aplicacao.recursos.AtualizadorSituacao;
 import com.fatec.aplicacao.recursos.Selecionador;
 import com.fatec.aplicacao.recursos.TituloAtualizador;
 import com.fatec.aplicacao.repositorio.RepositorioCliente;
-//import com.fatec.aplicacao.recursos.TituloAtualizador;
+import com.fatec.aplicacao.repositorio.RepositorioPrestacao;
 import com.fatec.aplicacao.repositorio.RepositorioTitulos;
 
 @RestController
@@ -33,6 +33,9 @@ public class ControleTitulos {
 	
 	@Autowired
 	private RepositorioCliente repositorioCliente;
+	
+	@Autowired
+	private RepositorioPrestacao repositorioPrestacao;
 	
 	@PostMapping("/cadastro/titulos")
 	public void cadastrar(@RequestBody Titulos novoTitulos) {
@@ -50,28 +53,15 @@ public class ControleTitulos {
 		}
 		return clientes;
 		}
-				/*if ( !titulo.getSituacao().equalsIgnoreCase("Pago")) {
-					int data_vencimento = Integer.parseInt(titulo.getData_vencimento().replace("-", ""));
-					if (data_vencimento <= data_atual) {
-						titulo.setSituacao("Inadimplente");
-						}
-					} else if (
-						Integer.parseInt(titulo.getData_pagamento().replace("-", "")) +
-						titulo.getTempo_credito() <= data_atual) {
-						titulo.setSituacao("Creditado");
-					}
-				}
-			}*/
-		
 	
-	/*@GetMapping("/atualizar/titulo_prestacoes/{id}")
-	public Titulos atualizarTituloPrestacoes(@PathVariable long id) {
-		List<Titulos> titulos = repositorioTitulos.findAll();
-		Titulos titulo = Selecionador.selecionarTitulos(titulos, id);
-		for (Prestacao prestacao: titulo.getPrestacoes()) {
-			
-		}
-	}*/
+	@PutMapping("/pagar/prestacao")
+	public void pagarPrestacao(@RequestBody Prestacao prestacaoPaga) {
+		@SuppressWarnings("deprecation")
+		Prestacao prestacao = repositorioPrestacao.getById(prestacaoPaga.getId());
+		prestacao.setSituacao("Pago");
+		prestacao.setData_pagamento(prestacaoPaga.getData_pagamento());
+	
+	}
 
 	
 	@GetMapping("/listagem/titulos")

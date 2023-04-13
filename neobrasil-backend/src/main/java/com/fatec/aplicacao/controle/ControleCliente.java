@@ -20,7 +20,7 @@ import com.fatec.aplicacao.recursos.ClienteAtualizador;
 import com.fatec.aplicacao.recursos.DataManipulacao;
 import com.fatec.aplicacao.recursos.Selecionador;
 import com.fatec.aplicacao.repositorio.RepositorioCliente;
-import com.fatec.aplicacao.repositorio.RepositorioTitulos;
+
 
 
 @RestController
@@ -29,9 +29,7 @@ public class ControleCliente {
 	
 	@Autowired
 	private RepositorioCliente repositorioCliente;
-	
-	@Autowired
-	private RepositorioTitulos repositorioTitulos;
+
 
 	@PostMapping("/cadastro/cliente")
 	public void cadastrar(@RequestBody Cliente novoCliente) throws ParseException {

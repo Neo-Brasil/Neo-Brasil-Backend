@@ -36,7 +36,6 @@ public class ControleUsuario {
 		List<String> areas = setores.stream()
                 .map(Setor::getArea)
                 .collect(Collectors.toList());
-		//Setor setorUsuario = novoUsuario.getSetor();
 		novoUsuario.setSetor(setores.get(areas.indexOf(novoUsuario.getSetor().getArea())));
 		repositorio.save(novoUsuario);
 	}

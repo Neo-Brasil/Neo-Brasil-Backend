@@ -1,9 +1,5 @@
 package com.fatec.aplicacao.recursos;
 
-import java.util.List;
-
-import org.springframework.web.bind.annotation.PathVariable;
-
 import com.fatec.aplicacao.modelo.Prestacao;
 import com.fatec.aplicacao.modelo.Titulos;
 
