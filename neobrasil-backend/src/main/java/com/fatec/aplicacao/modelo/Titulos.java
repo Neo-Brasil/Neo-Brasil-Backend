@@ -34,10 +34,6 @@ public class Titulos {
 	@Column
 	private int ultimo_valor_pago;
 	@Column
-	private String data_vencimento;
-	@Column
-	private String data_pagamento;
-	@Column
 	private int tempo_credito;
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	private List<Prestacao> prestacoes = new ArrayList<>();
@@ -64,18 +60,6 @@ public class Titulos {
 	}
 	public void setUltimo_valor_pago(int ultimo_valor_pago) {
 		this.ultimo_valor_pago = ultimo_valor_pago;
-	}
-	public String getData_vencimento() {
-		return data_vencimento;
-	}
-	public void setData_vencimento(String data_vencimento) {
-		this.data_vencimento = data_vencimento;
-	}
-	public String getData_pagamento() {
-		return data_pagamento;
-	}
-	public void setData_pagamento(String data_pagamento) {
-		this.data_pagamento = data_pagamento;
 	}
 	public int getTempo_credito() {
 		return tempo_credito;

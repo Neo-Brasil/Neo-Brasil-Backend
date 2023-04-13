@@ -61,8 +61,8 @@ public class AplicacaoApplication implements CommandLineRunner {
 			Titulos tit = new Titulos();
 			tit.setTitulo("Gold");
 			tit.setPreco(900);
-			tit.setData_vencimento("2023-03-07");
-			tit.setData_pagamento("2023-09-03");
+			//tit.setData_vencimento("2023-03-07");
+			//tit.setData_pagamento("2023-09-03");
 			tit.setTempo_credito(5);
 						
 			cliente.setEndereco(end);
@@ -87,8 +87,8 @@ public class AplicacaoApplication implements CommandLineRunner {
 			tit = new Titulos();
 			tit.setTitulo("Gold");
 			tit.setPreco(500);
-			tit.setData_vencimento("2023-03-07");
-			tit.setData_pagamento("2023-09-03");
+			//tit.setData_vencimento("2023-03-07");
+			//tit.setData_pagamento("2023-09-03");
 			tit.setTempo_credito(2);
 			
 			cliente.setEndereco(end);
@@ -112,8 +112,8 @@ public class AplicacaoApplication implements CommandLineRunner {
 			tit = new Titulos();
 			tit.setTitulo("Gold");
 			tit.setPreco(700);
-			tit.setData_vencimento("2023-03-07");
-			tit.setData_pagamento("2023-09-03");
+			//tit.setData_vencimento("2023-03-07");
+			//tit.setData_pagamento("2023-09-03");
 			tit.setTempo_credito(4);
 			
 			cliente.setEndereco(end);
@@ -137,8 +137,8 @@ public class AplicacaoApplication implements CommandLineRunner {
 			tit = new Titulos();
 			tit.setTitulo("Gold");
 			tit.setPreco(1000);
-			tit.setData_vencimento("2023-03-07");
-			tit.setData_pagamento("2023-09-03");
+			//tit.setData_vencimento("2023-03-07");
+			//tit.setData_pagamento("2023-09-03");
 			tit.setTempo_credito(2);
 			
 			cliente.setEndereco(end);
@@ -162,7 +162,7 @@ public class AplicacaoApplication implements CommandLineRunner {
 			tit = new Titulos();
 			tit.setTitulo("Gold");
 			tit.setPreco(1000);
-			tit.setData_vencimento("2023-04-08");
+			//tit.setData_vencimento("2023-04-08");
 			tit.setTempo_credito(2);
 			
 			cliente.setEndereco(end);
