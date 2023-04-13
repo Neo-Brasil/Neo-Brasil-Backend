@@ -27,5 +27,7 @@ public class Prestacao {
 	private String data_pagamento;
 	@Column
 	private float preco;
+	@Column
+	private String situacao;
 	
 }
