@@ -10,9 +10,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.fatec.aplicacao.modelo.Cliente;
 import com.fatec.aplicacao.modelo.Endereco;
+import com.fatec.aplicacao.modelo.Setor;
 import com.fatec.aplicacao.modelo.Titulos;
 import com.fatec.aplicacao.modelo.Usuario;
 import com.fatec.aplicacao.repositorio.RepositorioCliente;
+import com.fatec.aplicacao.repositorio.RepositorioSetor;
 import com.fatec.aplicacao.repositorio.RepositorioUsuario;
 
 @SpringBootApplication
@@ -22,6 +24,8 @@ public class AplicacaoApplication implements CommandLineRunner {
 	public RepositorioCliente repositorio;
 	@Autowired
 	public RepositorioUsuario repositorioUsuario;
+	@Autowired
+	private RepositorioSetor repositorioSetor;
 	
 	public static void main(String[] args) {
 		
@@ -60,8 +64,7 @@ public class AplicacaoApplication implements CommandLineRunner {
 			tit.setData_vencimento("2023-03-07");
 			tit.setData_pagamento("2023-09-03");
 			tit.setTempo_credito(5);
-			tit.setSituacao("Em aberto");
-			
+						
 			cliente.setEndereco(end);
 			cliente.getTitulos().add(tit);
 			repositorio.save(cliente);
@@ -87,7 +90,6 @@ public class AplicacaoApplication implements CommandLineRunner {
 			tit.setData_vencimento("2023-03-07");
 			tit.setData_pagamento("2023-09-03");
 			tit.setTempo_credito(2);
-			tit.setSituacao("Em aberto");
 			
 			cliente.setEndereco(end);
 			cliente.getTitulos().add(tit);
@@ -113,7 +115,6 @@ public class AplicacaoApplication implements CommandLineRunner {
 			tit.setData_vencimento("2023-03-07");
 			tit.setData_pagamento("2023-09-03");
 			tit.setTempo_credito(4);
-			tit.setSituacao("Em aberto");
 			
 			cliente.setEndereco(end);
 			cliente.getTitulos().add(tit);
@@ -139,7 +140,6 @@ public class AplicacaoApplication implements CommandLineRunner {
 			tit.setData_vencimento("2023-03-07");
 			tit.setData_pagamento("2023-09-03");
 			tit.setTempo_credito(2);
-			tit.setSituacao("Em aberto");
 			
 			cliente.setEndereco(end);
 			cliente.getTitulos().add(tit);
@@ -164,16 +164,31 @@ public class AplicacaoApplication implements CommandLineRunner {
 			tit.setPreco(1000);
 			tit.setData_vencimento("2023-04-08");
 			tit.setTempo_credito(2);
-			tit.setSituacao("Em aberto");
 			
 			cliente.setEndereco(end);
 			cliente.getTitulos().add(tit);
 			repositorio.save(cliente);
 			
+			Setor seto = new Setor();
+			seto.setArea("Comercial");
+			repositorioSetor.save(seto);
+			
+			seto = new Setor();
+			seto.setArea("Financeiro");
+			repositorioSetor.save(seto);
+			
+			Setor setorAdm = new Setor();
+			seto.setArea("Administrador");
+			repositorioSetor.save(setorAdm);
+			
 			Usuario usuario = new Usuario();
+			usuario.setNome("ADM");
 			usuario.setEmail("administrador@adm.com");
 			usuario.setSenha("fatec");
+			
 			repositorioUsuario.save(usuario);
+
+
 	}
 
 }

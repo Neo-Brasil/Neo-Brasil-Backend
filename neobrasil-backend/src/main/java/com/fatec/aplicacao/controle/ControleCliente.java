@@ -42,6 +42,7 @@ public class ControleCliente {
 			List<String> listaDatas = DataManipulacao.CriarDatas(data_atual);
 			for (int i = 0; i < 12; i++) {
 				Prestacao prestacao = new Prestacao();
+				prestacao.setSituacao("Em aberto");
 				prestacao.setData_vencimento(listaDatas.get(i));
 				prestacao.setPreco(titulo.getPreco()/12);
 				prestacoes.add(prestacao);
