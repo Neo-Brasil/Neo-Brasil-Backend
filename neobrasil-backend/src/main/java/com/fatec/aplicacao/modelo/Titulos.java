@@ -40,7 +40,6 @@ public class Titulos {
 	@Column
 	private int tempo_credito;
 	@Column
-	private String situacao;
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	private List<Prestacao> prestacoes = new ArrayList<>();
 }
