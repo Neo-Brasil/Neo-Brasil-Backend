@@ -58,9 +58,10 @@ public class ControleTitulos {
 	public void pagarPrestacao(@RequestBody Prestacao prestacaoPaga) {
 		@SuppressWarnings("deprecation")
 		Prestacao prestacao = repositorioPrestacao.getById(prestacaoPaga.getId());
+		System.out.print(prestacao);
 		prestacao.setSituacao("Pago");
 		prestacao.setData_pagamento(prestacaoPaga.getData_pagamento());
-	
+		repositorioPrestacao.save(prestacao);
 	}
 
 	
