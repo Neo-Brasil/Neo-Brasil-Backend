@@ -8,16 +8,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-//import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import com.fatec.aplicacao.modelo.Cliente;
 import com.fatec.aplicacao.modelo.Prestacao;
 import com.fatec.aplicacao.modelo.Titulos;
-import com.fatec.aplicacao.recursos.AtualizadorSituacao;
+import com.fatec.aplicacao.recursos.PrestacoesFunc;
 import com.fatec.aplicacao.recursos.Selecionador;
 import com.fatec.aplicacao.recursos.TituloAtualizador;
 import com.fatec.aplicacao.repositorio.RepositorioCliente;
@@ -48,20 +49,23 @@ public class ControleTitulos {
 		for (Cliente cliente : clientes ) {
 			List<Titulos> titulos = cliente.getTitulos();
 			for (Titulos titulo : titulos) {
-				AtualizadorSituacao.atualizarTituloPrestacoes(titulo, data_atual);
+				PrestacoesFunc.atualizarTituloPrestacoes(titulo, data_atual);
 			}
 		}
 		return clientes;
 		}
 	
+	@SuppressWarnings("deprecation")
 	@PutMapping("/pagar/prestacao")
-	public void pagarPrestacao(@RequestBody Prestacao prestacaoPaga) {
-		@SuppressWarnings("deprecation")
+	public void pagarPrestacao(@RequestBody Titulos TituloPrestacaoPaga) throws ParseException {
+		System.out.print(TituloPrestacaoPaga.getPrestacoes());
+		System.out.print("@$");
+		Prestacao prestacaoPaga = TituloPrestacaoPaga.getPrestacoes().get(0);
 		Prestacao prestacao = repositorioPrestacao.getById(prestacaoPaga.getId());
-		System.out.print(prestacao);
 		prestacao.setSituacao("Pago");
 		prestacao.setData_pagamento(prestacaoPaga.getData_pagamento());
 		repositorioPrestacao.save(prestacao);
+		repositorioTitulos.save(PrestacoesFunc.criarNovaPrestacao(repositorioTitulos.getById(TituloPrestacaoPaga.getId())));
 	}
 
 	
