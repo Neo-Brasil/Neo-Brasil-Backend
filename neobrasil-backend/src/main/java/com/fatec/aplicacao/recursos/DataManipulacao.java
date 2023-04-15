@@ -8,11 +8,11 @@ import java.text.SimpleDateFormat;
 
 public class DataManipulacao {
 	
-	public static String AdicionarDias(String dataStr) throws ParseException { 
+	public static String AdicionarDias(String dataStr, int dias) throws ParseException { 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar c = Calendar.getInstance();
         c.setTime(sdf.parse(dataStr));
-        c.add(Calendar.DATE, 30);
+        c.add(Calendar.DATE, dias);
         String data = sdf.format(c.getTime()); 
         System.out.print(data);
         return data;
@@ -22,7 +22,7 @@ public class DataManipulacao {
 		List<String> listaDatas = new ArrayList<>();
 		listaDatas.add(dataInicio);
 		for (int i = 1; i < 12; i++) {
-			listaDatas.add(DataManipulacao.AdicionarDias(listaDatas.get(i-1)));
+			listaDatas.add(DataManipulacao.AdicionarDias(listaDatas.get(i-1), 30));
 		}
 		return listaDatas;
 	}

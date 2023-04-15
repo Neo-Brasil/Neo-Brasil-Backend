@@ -33,7 +33,7 @@ public class AplicacaoApplication implements CommandLineRunner {
 		configuracao.put("server.port", "9080"); // seleção da porta
 		configuracao.put("spring.datasource.url", "jdbc:mysql://localhost:3306/banco"); // caminho da conexão
 		configuracao.put("spring.datasource.username", "root"); // usuario
-		configuracao.put("spring.datasource.password", "root"); // senha
+		configuracao.put("spring.datasource.password", "fatec"); // senha
 		configuracao.put("spring.jpa.show-sql", "true"); // mostrar comandos
 		configuracao.put("spring.jpa.hibernate.ddl-auto", "update"); // criar editar
 		
