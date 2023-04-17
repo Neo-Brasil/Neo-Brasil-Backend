@@ -32,42 +32,10 @@ public class ControleTitulos {
 	@Autowired
 	private RepositorioTitulos repositorioTitulos;
 	
-	@Autowired
-	private RepositorioCliente repositorioCliente;
-	
-	@Autowired
-	private RepositorioPrestacao repositorioPrestacao;
-	
 	@PostMapping("/cadastro/titulos")
 	public void cadastrar(@RequestBody Titulos novoTitulos) {
 		repositorioTitulos.save(novoTitulos);
 	}
-	@GetMapping("/listagem/titulos/atualizar_situacao")
-	public List<Cliente> obterTitulosAtualizarSituacao(){
-		List<Cliente> clientes = repositorioCliente.findAll();
-		int data_atual = Integer.parseInt(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")).replace("/", ""));
-		for (Cliente cliente : clientes ) {
-			List<Titulos> titulos = cliente.getTitulos();
-			for (Titulos titulo : titulos) {
-				PrestacoesFunc.atualizarTituloPrestacoes(titulo, data_atual);
-			}
-		}
-		return clientes;
-		}
-	
-	@SuppressWarnings("deprecation")
-	@PutMapping("/pagar/prestacao")
-	public void pagarPrestacao(@RequestBody Titulos TituloPrestacaoPaga) throws ParseException {
-		System.out.print(TituloPrestacaoPaga.getPrestacoes());
-		System.out.print("@$");
-		Prestacao prestacaoPaga = TituloPrestacaoPaga.getPrestacoes().get(0);
-		Prestacao prestacao = repositorioPrestacao.getById(prestacaoPaga.getId());
-		prestacao.setSituacao("Pago");
-		prestacao.setData_pagamento(prestacaoPaga.getData_pagamento());
-		repositorioPrestacao.save(prestacao);
-		repositorioTitulos.save(PrestacoesFunc.criarNovaPrestacao(repositorioTitulos.getById(TituloPrestacaoPaga.getId())));
-	}
-
 	
 	@GetMapping("/listagem/titulos")
 	public List<Titulos> obterListaTitulos(){
