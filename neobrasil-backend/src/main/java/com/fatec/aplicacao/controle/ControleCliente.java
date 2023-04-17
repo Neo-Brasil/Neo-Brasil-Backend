@@ -42,7 +42,7 @@ public class ControleCliente {
 				Prestacao prestacao = new Prestacao();
 				prestacao.setSituacao("Em aberto");
 				prestacao.setData_vencimento(listaDatas.get(i));
-				prestacao.setPreco(titulo.getPreco()/12);
+				prestacao.setPreco(titulo.getPreco());
 				prestacoes.add(prestacao);
 			}
 		}

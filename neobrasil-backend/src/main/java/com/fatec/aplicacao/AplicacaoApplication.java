@@ -106,6 +106,7 @@ public class AplicacaoApplication implements CommandLineRunner {
 			end.setLogradouro("Avenida dos bairros");
 			end.setBairro("Bairro das Avenidas");
 			end.setLocalidade("Bairrinho");
+			end.setNumero("20");
 			end.setComplemento("Rua que tem algumas avenidas");
 			end.setUF("SE");
 			
