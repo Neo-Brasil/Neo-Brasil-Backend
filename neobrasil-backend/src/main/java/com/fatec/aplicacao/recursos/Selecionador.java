@@ -43,10 +43,10 @@ public class Selecionador {
 		return selecionado;
 	}
 	
-	public static boolean checarUsuario(List<Usuario> usuarios, String nome, String email, String senha) {
+	public static boolean checarUsuario(List<Usuario> usuarios, String email, String senha) {
 		Usuario selecionado = null;
 		for (Usuario usuario : usuarios) {
-			if (usuario.getNome().equals(nome) && usuario.getEmail().equals(email) && usuario.getSenha().equals(senha)) {
+			if (usuario.getEmail().equals(email) && usuario.getSenha().equals(senha)) {
 				selecionado = usuario;
 				break;
 			}

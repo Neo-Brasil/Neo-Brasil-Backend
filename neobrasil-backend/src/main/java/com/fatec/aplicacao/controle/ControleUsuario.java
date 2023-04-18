@@ -42,7 +42,7 @@ public class ControleUsuario {
 	@PostMapping("/checagem/usuario")
 	public boolean checagem(@RequestBody Usuario novoUsuario) {
 		List<Usuario> usuarios = repositorio.findAll();
-		return Selecionador.checarUsuario(usuarios, novoUsuario.getNome(), novoUsuario.getEmail(), novoUsuario.getSenha());
+		return Selecionador.checarUsuario(usuarios, novoUsuario.getEmail(), novoUsuario.getSenha());
 	}
 	
 	@GetMapping("/listagem/usuarios")
