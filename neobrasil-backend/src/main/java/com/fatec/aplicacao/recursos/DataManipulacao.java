@@ -26,4 +26,8 @@ public class DataManipulacao {
 		return listaDatas;
 	}
 	
+	public static int stringDataPraInt(String data) {
+		return Integer.parseInt(data.replace("-", ""));
+	}
+	
 }
