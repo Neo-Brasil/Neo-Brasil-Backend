@@ -31,6 +31,7 @@ public class PrestacoesFunc {
 			novaPrestacao.setData_vencimento(DataManipulacao.AdicionarDias(ultimaPrestacao.getData_vencimento(), 30));
 			novaPrestacao.setPreco(ultimaPrestacao.getPreco());
 			novaPrestacao.setSituacao("Em aberto");
+			novaPrestacao.setData_pagamento("0000-00-00");
 			prestacoes.add(novaPrestacao);
 			return titulo;
 		}
