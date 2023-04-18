@@ -14,7 +14,6 @@ public class DataManipulacao {
         c.setTime(sdf.parse(dataStr));
         c.add(Calendar.DATE, dias);
         String data = sdf.format(c.getTime()); 
-        System.out.print(data);
         return data;
 	}
 	
