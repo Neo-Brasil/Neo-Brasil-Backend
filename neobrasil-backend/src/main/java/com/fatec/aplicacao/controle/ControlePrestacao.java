@@ -37,7 +37,7 @@ public class ControlePrestacao {
 	private RepositorioTitulos repositorioTitulos;
 	
 	@GetMapping("/listagem/titulos/atualizar_situacao")
-	public List<Cliente> obterTitulosAtualizarSituacao(){
+	public void obterTitulosAtualizarSituacao(){
 		List<Cliente> clientes = repositorioCliente.findAll();
 		int data_atual = Integer.parseInt(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")).replace("/", ""));
 		for (Cliente cliente : clientes ) {
@@ -46,8 +46,7 @@ public class ControlePrestacao {
 				PrestacoesFunc.atualizarTituloPrestacoes(titulo, data_atual);
 			}
 		}
-		return clientes;
-		}
+	}
 	
 	@SuppressWarnings("deprecation")
 	@PutMapping("/pagar/prestacao")
