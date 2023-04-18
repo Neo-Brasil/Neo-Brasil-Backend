@@ -42,6 +42,7 @@ public class ControleCliente {
 				Prestacao prestacao = new Prestacao();
 				prestacao.setSituacao("Em aberto");
 				prestacao.setData_vencimento(listaDatas.get(i));
+				prestacao.setData_pagamento("0000-00-00");
 				prestacao.setPreco(titulo.getPreco());
 				prestacoes.add(prestacao);
 			}
