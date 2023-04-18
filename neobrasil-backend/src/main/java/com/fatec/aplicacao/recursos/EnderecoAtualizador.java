@@ -22,6 +22,9 @@ public class EnderecoAtualizador {
 			if (!verificador.verificar(atualizacao.getLogradouro())) {
 				endereco.setLogradouro(atualizacao.getLogradouro());
 			}
+			if (!verificador.verificar(atualizacao.getNumero())) {
+				endereco.setNumero(atualizacao.getNumero());
+			}
 			if (!verificador.verificar(atualizacao.getUF())) {
 				endereco.setUF(atualizacao.getUF());
 			}
