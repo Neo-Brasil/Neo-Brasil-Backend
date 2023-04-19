@@ -17,6 +17,9 @@ public class UsuarioAtualizador {
 		if (!verificador.verificar(atualizacao.getSenha())) {
 			usuario.setSenha(atualizacao.getSenha());
 		}
+		if (!(null == atualizacao.getAutorizado())) {
+			usuario.setAutorizado(atualizacao.getAutorizado());
+		}
 	}
 
 	public void atualizar(Usuario usuario, Usuario atualizacao) {
