@@ -1,8 +1,8 @@
 package com.fatec.aplicacao.recursos;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
-
 import com.fatec.aplicacao.modelo.Prestacao;
 import com.fatec.aplicacao.modelo.Titulos;
 
@@ -34,6 +34,35 @@ public class PrestacoesFunc {
 			novaPrestacao.setData_pagamento("0000-00-00");
 			prestacoes.add(novaPrestacao);
 			return titulo;
+		}
+		
+		public static List<Prestacao> listarPrestacoesPeriodo(Titulos titulo, String data_inicio, String data_final) throws ParseException {
+			List<Prestacao> todasPrestacoes = titulo.getPrestacoes();
+			List<Prestacao> prestacoesPeriodo = new ArrayList<>();
+			for (int i=0; i< todasPrestacoes.size(); i++) {
+				if (DataManipulacao.stringDataPraInt(todasPrestacoes.get(i).getData_pagamento()) >= DataManipulacao.stringDataPraInt(data_inicio)
+					&& DataManipulacao.stringDataPraInt(todasPrestacoes.get(i).getData_pagamento()) <= DataManipulacao.stringDataPraInt(data_final))
+				{
+					prestacoesPeriodo.add(todasPrestacoes.get(i));
+				}else if (DataManipulacao.stringDataPraInt(todasPrestacoes.get(i).getData_vencimento()) >= DataManipulacao.stringDataPraInt(data_inicio)
+					&& DataManipulacao.stringDataPraInt(todasPrestacoes.get(i).getData_vencimento()) <= DataManipulacao.stringDataPraInt(data_final)) 
+				{
+					prestacoesPeriodo.add(todasPrestacoes.get(i));
+				}else if (DataManipulacao.stringDataPraInt(DataManipulacao.AdicionarDias(todasPrestacoes.get(i).getData_pagamento(), titulo.getTempo_credito())) >= DataManipulacao.stringDataPraInt(data_inicio)
+					&& DataManipulacao.stringDataPraInt(DataManipulacao.AdicionarDias(todasPrestacoes.get(i).getData_pagamento(), titulo.getTempo_credito())) <= DataManipulacao.stringDataPraInt(data_final)) 
+				{
+					prestacoesPeriodo.add(todasPrestacoes.get(i));
+				}
+			}
+			return prestacoesPeriodo;
+		}
+		
+		public static float contarPrecos(List<Prestacao> prestacoes) {
+			float somaTotal = 0;
+			for (Prestacao prestacao : prestacoes) {
+				somaTotal = somaTotal + prestacao.getPreco();
+			}
+			return somaTotal;
 		}
 	}
 

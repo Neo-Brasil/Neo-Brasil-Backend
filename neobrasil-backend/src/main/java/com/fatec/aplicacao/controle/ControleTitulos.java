@@ -10,19 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.text.ParseException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
-import com.fatec.aplicacao.modelo.Cliente;
-import com.fatec.aplicacao.modelo.Prestacao;
 import com.fatec.aplicacao.modelo.Titulos;
-import com.fatec.aplicacao.recursos.PrestacoesFunc;
 import com.fatec.aplicacao.recursos.Selecionador;
 import com.fatec.aplicacao.recursos.TituloAtualizador;
-import com.fatec.aplicacao.repositorio.RepositorioCliente;
-import com.fatec.aplicacao.repositorio.RepositorioPrestacao;
 import com.fatec.aplicacao.repositorio.RepositorioTitulos;
 
 @RestController
