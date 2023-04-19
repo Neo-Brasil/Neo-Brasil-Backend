@@ -28,6 +28,8 @@ public class Usuario {
 	private String email;
 	@Column
 	private String senha;
+	@Column
+	private Boolean autorizado;
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	private Setor setor;
 	public Long getId() {

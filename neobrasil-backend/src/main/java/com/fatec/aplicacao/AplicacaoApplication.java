@@ -171,24 +171,45 @@ public class AplicacaoApplication implements CommandLineRunner {
 			repositorio.save(cliente);
 			
 			Setor seto = new Setor();
-			seto.setArea("Comercial");
-			repositorioSetor.save(seto);
-			
-			seto = new Setor();
-			seto.setArea("Financeiro");
-			repositorioSetor.save(seto);
-			
-			seto = new Setor();
-			seto.setArea("Administrador");
-			repositorioSetor.save(seto);
-			
+		
 			Usuario usuario = new Usuario();
 			usuario.setNome("ADM");
 			usuario.setEmail("administrador@adm.com");
 			usuario.setSenha("fatec");
+			usuario.setAutorizado(true);
+			
+			seto = new Setor();
+			seto.setArea("Administrador");
+			
+			usuario.setSetor(seto);
 			
 			repositorioUsuario.save(usuario);
-
+			
+			usuario = new Usuario();
+			usuario.setNome("COM");
+			usuario.setEmail("comercial@com.com");
+			usuario.setSenha("fatec");
+			usuario.setAutorizado(true);
+			
+			seto = new Setor();
+			seto.setArea("comercial");
+			
+			usuario.setSetor(seto);
+			
+			repositorioUsuario.save(usuario);
+			
+			usuario = new Usuario();
+			usuario.setNome("FIN");
+			usuario.setEmail("financeiro@fin.com");
+			usuario.setSenha("fatec");
+			usuario.setAutorizado(true);
+			
+			seto = new Setor();
+			seto.setArea("Financeiro");
+			
+			usuario.setSetor(seto);
+			
+			repositorioUsuario.save(usuario);
 
 	}
 
