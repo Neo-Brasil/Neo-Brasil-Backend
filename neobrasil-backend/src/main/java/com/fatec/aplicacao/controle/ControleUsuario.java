@@ -64,9 +64,9 @@ public class ControleUsuario {
 		repositorio.save(usuario);
 	}
 	@SuppressWarnings("deprecation")
-	@DeleteMapping("/excluir/usuario")
-	public void excluirCliente(@RequestBody Usuario exclusao) {
-		Usuario usuario = repositorio.getById(exclusao.getId());
+	@DeleteMapping("/excluir/usuario/{id}")
+	public void excluirCliente(@PathVariable long id) {
+		Usuario usuario = repositorio.getById(id);
 		repositorio.delete(usuario);
 	}
 }
