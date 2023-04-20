@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fatec.aplicacao.modelo.Cliente;
 import com.fatec.aplicacao.modelo.Prestacao;
+import com.fatec.aplicacao.modelo.RelatorioValores;
 import com.fatec.aplicacao.modelo.Titulos;
-import com.fatec.aplicacao.recursos.DataManipulacao;
 import com.fatec.aplicacao.recursos.PrestacaoAtualizador;
 import com.fatec.aplicacao.recursos.PrestacoesFunc;
 import com.fatec.aplicacao.recursos.Selecionador;
@@ -61,28 +61,38 @@ public class ControlePrestacao {
 		repositorioTitulos.save(PrestacoesFunc.criarNovaPrestacao(repositorioTitulos.getById(TituloPrestacaoPaga.getId())));
 	}
 	
-	@SuppressWarnings("deprecation")
-	@GetMapping("/listagem/titulo_prestacoes/{id}/periodo/{data_inicio}/{data_final}")
-	public List<Prestacao> listarPrestacoesPeriodo(@PathVariable long id, @PathVariable String data_inicio, @PathVariable String data_final) throws ParseException {
-		Titulos titulo = repositorioTitulos.getById(id);
-		List<Prestacao> todasPrestacoes = titulo.getPrestacoes();
-		List<Prestacao> prestacoesPeriodo = new ArrayList<>();
-		for (int i=0; i< todasPrestacoes.size(); i++) {
-			if (DataManipulacao.stringDataPraInt(todasPrestacoes.get(i).getData_pagamento()) >= DataManipulacao.stringDataPraInt(data_inicio)
-				&& DataManipulacao.stringDataPraInt(todasPrestacoes.get(i).getData_pagamento()) <= DataManipulacao.stringDataPraInt(data_final))
-			{
-				prestacoesPeriodo.add(todasPrestacoes.get(i));
-			}else if (DataManipulacao.stringDataPraInt(todasPrestacoes.get(i).getData_vencimento()) >= DataManipulacao.stringDataPraInt(data_inicio)
-				&& DataManipulacao.stringDataPraInt(todasPrestacoes.get(i).getData_vencimento()) <= DataManipulacao.stringDataPraInt(data_final)) 
-			{
-				prestacoesPeriodo.add(todasPrestacoes.get(i));
-			}else if (DataManipulacao.stringDataPraInt(DataManipulacao.AdicionarDias(todasPrestacoes.get(i).getData_pagamento(), titulo.getTempo_credito())) >= DataManipulacao.stringDataPraInt(data_inicio)
-				&& DataManipulacao.stringDataPraInt(DataManipulacao.AdicionarDias(todasPrestacoes.get(i).getData_pagamento(), titulo.getTempo_credito())) <= DataManipulacao.stringDataPraInt(data_final)) 
-			{
-				prestacoesPeriodo.add(todasPrestacoes.get(i));
+	@GetMapping("/listagem/prestacoes_valores/periodo/{data_inicio}/{data_final}")
+	public RelatorioValores relatorioValores(@PathVariable String data_inicio, @PathVariable String data_final) throws ParseException {
+		List<Titulos> titulos = repositorioTitulos.findAll();
+		List<Prestacao> prestacoes = new ArrayList<>();
+		for (Titulos titulo : titulos) {
+			for (Prestacao prestacao : PrestacoesFunc.listarPrestacoesPeriodo(titulo, data_inicio, data_final)) {
+				prestacoes.add(prestacao);
 			}
 		}
-		return prestacoesPeriodo;
+		RelatorioValores relatorio = new RelatorioValores();
+		float expectativa = 0;
+		float recebido = 0;
+		float faltando = 0;
+		for (Prestacao prestacao : prestacoes) {
+			if (prestacao.getSituacao().equals("Creditado")) {
+				recebido = recebido + prestacao.getPreco();
+			}else if (prestacao.getSituacao().equals("Pago")) {
+				expectativa = expectativa + prestacao.getPreco();
+			}else faltando = faltando + prestacao.getPreco();
+		}
+		relatorio.setExpectativa(expectativa);
+		relatorio.setFaltante(faltando);
+		relatorio.setRecebido(recebido);
+		return relatorio;
+	}
+	
+	
+	@SuppressWarnings("deprecation")
+	@GetMapping("/listagem/titulo_prestacoes/{id}/periodo/{data_inicio}/{data_final}")
+	public List<Prestacao> listarTituloPrestacoesPeriodo(@PathVariable long id, @PathVariable String data_inicio, @PathVariable String data_final) throws ParseException {
+		Titulos titulo = repositorioTitulos.getById(id);
+		return PrestacoesFunc.listarPrestacoesPeriodo(titulo, data_inicio, data_final);
 	}
 	
 	@GetMapping("/selecionar/prestacao/{id}")
