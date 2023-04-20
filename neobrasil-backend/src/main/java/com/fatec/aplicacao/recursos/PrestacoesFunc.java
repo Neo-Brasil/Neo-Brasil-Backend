@@ -18,7 +18,7 @@ public class PrestacoesFunc {
 					}
 			} else if (
 				Integer.parseInt(prestacao.getData_pagamento().replace("-", "")) +
-				titulo.getTempo_credito() <= dataAtual && !prestacao.getData_pagamento().equals("0000-00-00")) {
+				titulo.getTempo_credito() <= dataAtual) {
 				prestacao.setSituacao("Creditado");
 				}
 			}

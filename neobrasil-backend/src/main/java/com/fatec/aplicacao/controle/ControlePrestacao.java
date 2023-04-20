@@ -46,6 +46,7 @@ public class ControlePrestacao {
 			List<Titulos> titulos = cliente.getTitulos();
 			for (Titulos titulo : titulos) {
 				PrestacoesFunc.atualizarTituloPrestacoes(titulo, data_atual);
+				repositorioTitulos.save(titulo);
 			}
 		}
 	}
