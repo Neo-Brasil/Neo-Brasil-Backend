@@ -28,7 +28,6 @@ public class ControleSetor {
 		repositorio.save(novoSetor);
 	}
 	@GetMapping("/listagem/setor")
-	@PreAuthorize("hasAnyAuthority('ADM','COMERCIAL', 'FINANCEIRO')")
 	public List<Setor> obterSetor(){
 		List<Setor> setores = repositorio.findAll();
 		return setores;
