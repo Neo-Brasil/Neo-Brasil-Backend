@@ -13,7 +13,7 @@ import com.fatec.aplicacao.modelo.Usuario;
 public class ServicoToken {
 	public String gerarToken(Usuario usuario) {
 		return JWT.create().withIssuer("").withSubject(usuario.getUsername()).withClaim("id", usuario.getId())
-				.withExpiresAt(LocalDateTime.now().plusMinutes(2).toInstant(ZoneOffset.of("-03:00"))
+				.withExpiresAt(LocalDateTime.now().plusMinutes(10).toInstant(ZoneOffset.of("-03:00"))
         ).sign(Algorithm.HMAC256("chavesecreta"));
 	}
 	
