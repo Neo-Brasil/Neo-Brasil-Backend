@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +33,7 @@ public class ControleCliente {
 
 
 	@PostMapping("/cadastro/cliente")
+	@PreAuthorize("hasAnyAuthority('ADM','COMERCIAL')")
 	public void cadastrar(@RequestBody Cliente novoCliente) throws ParseException {
 		List<Titulos> titulos = novoCliente.getTitulos();
 		String data_atual = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")).replace("/", "-");
@@ -50,12 +52,14 @@ public class ControleCliente {
 		repositorioCliente.save(novoCliente);
 	}
 	@GetMapping("/listagem/clientes")
+	@PreAuthorize("hasAnyAuthority('ADM','COMERCIAL')")
 	public List<Cliente> obterClientes(){
 		List<Cliente> clientes = repositorioCliente.findAll();
 		return clientes;
 	}
 	
 	@GetMapping("/selecionar/cliente/{id}")
+	@PreAuthorize("hasAnyAuthority('ADM','COMERCIAL','FINANCEIRO')")
 	public Cliente obterCliente(@PathVariable long id) {
 		List<Cliente> clientes = repositorioCliente.findAll();
 		return Selecionador.selecionarCliente(clientes, id);
@@ -63,6 +67,7 @@ public class ControleCliente {
 	
 	@SuppressWarnings("deprecation")
 	@PutMapping("/atualizar")
+	@PreAuthorize("hasAnyAuthority('ADM','COMERCIAL')")
 	public void atualizarCliente(@RequestBody Cliente atualizacao) {
 		Cliente cliente = repositorioCliente.getById(atualizacao.getId());
 		ClienteAtualizador atualizador = new ClienteAtualizador();
@@ -72,6 +77,7 @@ public class ControleCliente {
 	
 	@SuppressWarnings("deprecation")
 	@DeleteMapping("/excluir/cliente/{id}")
+	@PreAuthorize("hasAnyAuthority('ADM','COMERCIAL')")
 	public void excluirCliente(@PathVariable long id) {
 		Cliente cliente = repositorioCliente.getById(id);
 		repositorioCliente.delete(cliente);

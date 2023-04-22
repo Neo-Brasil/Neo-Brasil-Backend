@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fatec.aplicacao.configuracoes.seguranca.Configuracoes;
 import com.fatec.aplicacao.modelo.Setor;
 import com.fatec.aplicacao.modelo.Usuario;
 import com.fatec.aplicacao.recursos.Selecionador;
@@ -28,6 +30,9 @@ public class ControleUsuario {
 	private RepositorioUsuario repositorio;
 	
 	@Autowired
+	private Configuracoes configuracoes;
+	
+	@Autowired
 	private RepositorioSetor repositorioSetor;
 	
 	@PostMapping("/cadastro/usuario")
@@ -37,26 +42,26 @@ public class ControleUsuario {
                 .map(Setor::getArea)
                 .collect(Collectors.toList());
 		novoUsuario.setSetor(setores.get(areas.indexOf(novoUsuario.getSetor().getArea())));
+		
+		novoUsuario.setSenha(configuracoes.getpasswordEncoder().encode(novoUsuario.getSenha()));
 		repositorio.save(novoUsuario);
 	}
-	@PostMapping("/checagem/usuario")
-	public boolean checagem(@RequestBody Usuario novoUsuario) {
-		List<Usuario> usuarios = repositorio.findAll();
-		return Selecionador.checarUsuario(usuarios, novoUsuario.getEmail(), novoUsuario.getSenha());
-	}
-	
+
 	@GetMapping("/listagem/usuarios")
+	@PreAuthorize("hasAnyAuthority('ADM')")
 	public List<Usuario> obterUsuario(){
 		List<Usuario> usuarios = repositorio.findAll();
 		return usuarios;
 	}
 	@GetMapping("/selecionar/usuario/{id}")
+	@PreAuthorize("hasAnyAuthority('ADM')")
 	public Usuario obterUsuario(@PathVariable long id) {
 		List<Usuario> usuarios = repositorio.findAll();
 		return Selecionador.selecionarUsuario(usuarios, id);
 	}
 	@SuppressWarnings("deprecation")
 	@PutMapping("/atualizar/usuario")
+	@PreAuthorize("hasAnyAuthority('ADM')")
 	public void atualizarUsuario(@RequestBody Usuario atualizacao) {
 		Usuario usuario = repositorio.getById(atualizacao.getId());
 		UsuarioAtualizador atualizador = new UsuarioAtualizador();
@@ -65,6 +70,7 @@ public class ControleUsuario {
 	}
 	@SuppressWarnings("deprecation")
 	@DeleteMapping("/excluir/usuario/{id}")
+	@PreAuthorize("hasAnyAuthority('ADM')")
 	public void excluirCliente(@PathVariable long id) {
 		Usuario usuario = repositorio.getById(id);
 		repositorio.delete(usuario);

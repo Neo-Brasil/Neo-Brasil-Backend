@@ -2,6 +2,7 @@ package com.fatec.aplicacao.controle;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,23 +24,27 @@ public class ControleTitulos {
 	private RepositorioTitulos repositorioTitulos;
 	
 	@PostMapping("/cadastro/titulos")
+	@PreAuthorize("hasAnyAuthority('ADM','COMERCIAL', 'FINANCEIRO')")
 	public void cadastrar(@RequestBody Titulos novoTitulos) {
 		repositorioTitulos.save(novoTitulos);
 	}
 	
 	@GetMapping("/listagem/titulos")
+	@PreAuthorize("hasAnyAuthority('ADM','COMERCIAL', 'FINANCEIRO')")
 	public List<Titulos> obterListaTitulos(){
 		List<Titulos> titulos = repositorioTitulos.findAll();
 		return titulos;
 	}
 	
 	@GetMapping("/selecionar/titulos/{id}")
+	@PreAuthorize("hasAnyAuthority('ADM','COMERCIAL', 'FINANCEIRO')")
 	public Titulos obterTitulos(@PathVariable long id) {
 		List<Titulos> titulos = repositorioTitulos.findAll();
 		return Selecionador.selecionarTitulos(titulos, id);
 	}
 	@SuppressWarnings("deprecation")
 	@PutMapping("/atualizar/titulo")
+	@PreAuthorize("hasAnyAuthority('ADM','COMERCIAL', 'FINANCEIRO')")
 	public void atualizarTitulo(@RequestBody Titulos atualizacao) {
 		Titulos titulo = repositorioTitulos.getById(atualizacao.getId());
 		TituloAtualizador atualizador = new TituloAtualizador();
@@ -48,6 +53,7 @@ public class ControleTitulos {
 	}
 	@SuppressWarnings("deprecation")
 	@DeleteMapping("/excluir/titulos")
+	@PreAuthorize("hasAnyAuthority('ADM','COMERCIAL', 'FINANCEIRO')")
 	public void excluirTitulo(@RequestBody Titulos exclusao) {
 		Titulos titulos = repositorioTitulos.getById(exclusao.getId());
 		repositorioTitulos.delete(titulos);

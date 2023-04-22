@@ -30,7 +30,7 @@ public class AplicacaoApplication implements CommandLineRunner {
 	public static void main(String[] args) {
 		
 		Map<String, Object> configuracao = new HashMap<>();
-		configuracao.put("server.port", "9080"); // seleção da porta
+		configuracao.put("server.port", "8080"); // seleção da porta
 		configuracao.put("spring.datasource.url", "jdbc:mysql://localhost:3306/banco"); // caminho da conexão
 		configuracao.put("spring.datasource.username", "root"); // usuario
 		configuracao.put("spring.datasource.password", "fatec"); // senha
@@ -175,12 +175,13 @@ public class AplicacaoApplication implements CommandLineRunner {
 			Usuario usuario = new Usuario();
 			usuario.setNome("ADM");
 			usuario.setEmail("administrador@adm.com");
-			usuario.setSenha("fatec");
+			usuario.setSenha("$2a$12$fS24..3i0TKeZL0xEGteq.j8wwy7dgDug6VAyZVA6NtxNNm1Q1Kli");
 			usuario.setAutorizado(true);
 			
 			seto = new Setor();
 			seto.setArea("Administrador");
 			
+			usuario.setPapel("ADM");
 			usuario.setSetor(seto);
 			
 			repositorioUsuario.save(usuario);
@@ -188,26 +189,28 @@ public class AplicacaoApplication implements CommandLineRunner {
 			usuario = new Usuario();
 			usuario.setNome("COM");
 			usuario.setEmail("comercial@com.com");
-			usuario.setSenha("fatec");
+			usuario.setSenha("$2a$12$fS24..3i0TKeZL0xEGteq.j8wwy7dgDug6VAyZVA6NtxNNm1Q1Kli");
 			usuario.setAutorizado(true);
 			
 			seto = new Setor();
-			seto.setArea("comercial");
+			seto.setArea("Comercial");
 			
 			usuario.setSetor(seto);
+			usuario.setPapel("COMERCIAL");
 			
 			repositorioUsuario.save(usuario);
 			
 			usuario = new Usuario();
 			usuario.setNome("FIN");
 			usuario.setEmail("financeiro@fin.com");
-			usuario.setSenha("fatec");
+			usuario.setSenha("$2a$12$fS24..3i0TKeZL0xEGteq.j8wwy7dgDug6VAyZVA6NtxNNm1Q1Kli");
 			usuario.setAutorizado(true);
 			
 			seto = new Setor();
 			seto.setArea("Financeiro");
 			
 			usuario.setSetor(seto);
+			usuario.setPapel("FINANCEIRO");
 			
 			repositorioUsuario.save(usuario);
 

@@ -19,7 +19,17 @@ public class UsuarioAtualizador {
 		}
 		if (!(null == atualizacao.getAutorizado())) {
 			usuario.setAutorizado(atualizacao.getAutorizado());
+			if (atualizacao.getSetor().getArea().equals("Administrador")) {
+				usuario.setPapel("ADM");
+			} else if (atualizacao.getSetor().getArea().equals("Comercial")) {
+				usuario.setPapel("COMERCIAL");
+ 			} else {
+ 				usuario.setPapel("FINANCEIRO");
+ 			}
+			
 		}
+		
+		
 	}
 
 	public void atualizar(Usuario usuario, Usuario atualizacao) {

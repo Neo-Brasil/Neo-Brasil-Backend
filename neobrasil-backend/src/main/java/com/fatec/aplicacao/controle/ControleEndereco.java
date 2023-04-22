@@ -1,6 +1,7 @@
 package com.fatec.aplicacao.controle;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,16 +21,19 @@ public class ControleEndereco {
 	private RepositorioEndereco repositorio;
 
 	@PostMapping("/cadastro/endereco")
+	@PreAuthorize("hasAnyAuthority('ADM','COMERCIAL')")
 	public void cadastrar(@RequestBody Endereco novoEndereço) {
 		repositorio.save(novoEndereço);
 	}
 	@GetMapping("/listagem/endereco")
+	@PreAuthorize("hasAnyAuthority('ADM','COMERCIAL')")
 	public List<Endereco> obterEnderecos(){
 		List<Endereco> enderecos = repositorio.findAll();
 		return enderecos;
 	}
 	
 	@GetMapping("/selecionar/endereco/{id}")
+	@PreAuthorize("hasAnyAuthority('ADM','COMERCIAL')")
 	public Endereco obterEnderecos(@PathVariable long id) {
 		List<Endereco> enderecos = repositorio.findAll();
 		return Selecionador.selecionarEndereco(enderecos, id);
@@ -37,6 +41,7 @@ public class ControleEndereco {
 	
 	@SuppressWarnings("deprecation")
 	@DeleteMapping("/excluir/endereco")
+	@PreAuthorize("hasAnyAuthority('ADM','COMERCIAL')")
 	public void excluirCliente(@RequestBody Endereco exclusao) {
 		Endereco endereco = repositorio.getById(exclusao.getId());
 		repositorio.delete(endereco);

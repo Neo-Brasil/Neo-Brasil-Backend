@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,6 +40,7 @@ public class ControlePrestacao {
 	private RepositorioTitulos repositorioTitulos;
 	
 	@GetMapping("/listagem/titulos/atualizar_situacao")
+	@PreAuthorize("hasAnyAuthority('ADM','FINANCEIRO')")
 	public void obterTitulosAtualizarSituacao(){
 		List<Cliente> clientes = repositorioCliente.findAll();
 		int data_atual = Integer.parseInt(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")).replace("/", ""));
@@ -53,6 +55,7 @@ public class ControlePrestacao {
 	
 	@SuppressWarnings("deprecation")
 	@PutMapping("/pagar/prestacao")
+	@PreAuthorize("hasAnyAuthority('ADM','FINANCEIRO')")
 	public void pagarPrestacao(@RequestBody Titulos TituloPrestacaoPaga) throws ParseException {
 		Prestacao prestacaoPaga = TituloPrestacaoPaga.getPrestacoes().get(0);
 		Prestacao prestacao = repositorioPrestacao.getById(prestacaoPaga.getId());
@@ -63,6 +66,7 @@ public class ControlePrestacao {
 	}
 	
 	@GetMapping("/listagem/prestacoes_valores/periodo/{data_inicio}/{data_final}")
+	@PreAuthorize("hasAnyAuthority('ADM','COMERCIAL', 'FINANCEIRO')")
 	public RelatorioValores relatorioValores(@PathVariable String data_inicio, @PathVariable String data_final) throws ParseException {
 		List<Titulos> titulos = repositorioTitulos.findAll();
 		List<Prestacao> prestacoes = new ArrayList<>();
@@ -91,12 +95,14 @@ public class ControlePrestacao {
 	
 	@SuppressWarnings("deprecation")
 	@GetMapping("/listagem/titulo_prestacoes/{id}/periodo/{data_inicio}/{data_final}")
+	@PreAuthorize("hasAnyAuthority('ADM','COMERCIAL', 'FINANCEIRO')")
 	public List<Prestacao> listarTituloPrestacoesPeriodo(@PathVariable long id, @PathVariable String data_inicio, @PathVariable String data_final) throws ParseException {
 		Titulos titulo = repositorioTitulos.getById(id);
 		return PrestacoesFunc.listarPrestacoesPeriodo(titulo, data_inicio, data_final);
 	}
 	
 	@GetMapping("/selecionar/prestacao/{id}")
+	@PreAuthorize("hasAnyAuthority('ADM','COMERCIAL', 'FINANCEIRO')")
 	public Prestacao obterTitulos(@PathVariable long id) {
 		List<Prestacao> titulos = repositorioPrestacao.findAll();
 		return Selecionador.selecionarPrestacao(titulos, id);
@@ -104,6 +110,7 @@ public class ControlePrestacao {
 	
 	@SuppressWarnings("deprecation")
 	@PutMapping("/atualizar/prestacao")
+	@PreAuthorize("hasAnyAuthority('ADM','COMERCIAL', 'FINANCEIRO')")
 	public void atualizarPrestacao(@RequestBody Prestacao atualizacao) {
 		Prestacao prestacao = repositorioPrestacao.getById(atualizacao.getId());
 		PrestacaoAtualizador atualizador = new PrestacaoAtualizador();

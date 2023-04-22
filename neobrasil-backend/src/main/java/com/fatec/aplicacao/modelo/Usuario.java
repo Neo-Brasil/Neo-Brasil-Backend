@@ -1,5 +1,14 @@
 package com.fatec.aplicacao.modelo;
 
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,7 +26,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Usuario {
+public class Usuario implements UserDetails{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@EqualsAndHashCode.Include
@@ -27,11 +36,15 @@ public class Usuario {
 	@Column
 	private String email;
 	@Column
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String senha;
 	@Column
 	private Boolean autorizado;
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	private Setor setor;
+	@Column
+	private String papel;
+	
 	public Long getId() {
 		return id;
 	}
@@ -44,18 +57,21 @@ public class Usuario {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	/*
 	public String getEmail() {
 		return email;
 	}
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
 	public String getSenha() {
 		return senha;
 	}
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+	*/
 	public Setor getSetor() {
 		return setor;
 	}
@@ -63,5 +79,39 @@ public class Usuario {
 		this.setor = setor;
 	}
 	
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities(){
+		return List.of(new SimpleGrantedAuthority(papel));
+	}
 	
-}
+	@Override
+	public String getPassword() {
+		return senha;
+	}
+	
+	@Override
+	public String getUsername() {
+		return email;
+	}
+	
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+	
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+	
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+	
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
+	
+ }
