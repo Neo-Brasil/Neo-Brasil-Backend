@@ -77,7 +77,7 @@ public class Configuracoes {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     	http.cors().and().csrf().disable();
 
-		http.authorizeHttpRequests().requestMatchers("/checagem/usuario", "/cadastro/usuario").permitAll().anyRequest().authenticated();
+		http.authorizeHttpRequests().requestMatchers("/checagem/usuario", "/cadastro/usuario", "/listagem/usuarios").permitAll().anyRequest().authenticated();
 
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 

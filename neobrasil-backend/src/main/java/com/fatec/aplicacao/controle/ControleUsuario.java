@@ -48,7 +48,6 @@ public class ControleUsuario {
 	}
 
 	@GetMapping("/listagem/usuarios")
-	@PreAuthorize("hasAnyAuthority('ADM')")
 	public List<Usuario> obterUsuario(){
 		List<Usuario> usuarios = repositorio.findAll();
 		return usuarios;
