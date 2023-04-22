@@ -30,7 +30,7 @@ public class AplicacaoApplication implements CommandLineRunner {
 	public static void main(String[] args) {
 		
 		Map<String, Object> configuracao = new HashMap<>();
-		configuracao.put("server.port", "8080"); // seleção da porta
+		configuracao.put("server.port", "9080"); // seleção da porta
 		configuracao.put("spring.datasource.url", "jdbc:mysql://localhost:3306/banco"); // caminho da conexão
 		configuracao.put("spring.datasource.username", "root"); // usuario
 		configuracao.put("spring.datasource.password", "fatec"); // senha
