@@ -25,6 +25,9 @@ public class TituloAtualizador {
 			if (!intVerificador.verificar(atualizacao.getUltimo_valor_pago())) {
 				titulo.setUltimo_valor_pago(atualizacao.getUltimo_valor_pago());
 			}
+			if (!intVerificador.verificar(atualizacao.getTempo_credito())) {
+				titulo.setTempo_credito(atualizacao.getTempo_credito());
+			}
 		}
 	}
 	
