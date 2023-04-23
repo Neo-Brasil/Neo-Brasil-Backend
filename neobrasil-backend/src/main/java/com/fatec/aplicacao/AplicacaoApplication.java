@@ -179,7 +179,7 @@ public class AplicacaoApplication implements CommandLineRunner {
 			usuario.setAutorizado(true);
 			
 			seto = new Setor();
-			seto.setArea("Administrador");
+			seto.setArea("ADMINISTRADOR");
 			
 			usuario.setPapel("ADM");
 			usuario.setSetor(seto);
@@ -193,7 +193,7 @@ public class AplicacaoApplication implements CommandLineRunner {
 			usuario.setAutorizado(true);
 			
 			seto = new Setor();
-			seto.setArea("Comercial");
+			seto.setArea("COMERCIAL");
 			
 			usuario.setSetor(seto);
 			usuario.setPapel("COMERCIAL");
@@ -207,7 +207,7 @@ public class AplicacaoApplication implements CommandLineRunner {
 			usuario.setAutorizado(true);
 			
 			seto = new Setor();
-			seto.setArea("Financeiro");
+			seto.setArea("FINANCEIRO");
 			
 			usuario.setSetor(seto);
 			usuario.setPapel("FINANCEIRO");
