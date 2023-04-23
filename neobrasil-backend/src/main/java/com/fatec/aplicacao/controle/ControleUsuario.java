@@ -43,6 +43,7 @@ public class ControleUsuario {
                 .collect(Collectors.toList());
 		novoUsuario.setSetor(setores.get(areas.indexOf(novoUsuario.getSetor().getArea())));
 		novoUsuario.setSenha(configuracoes.getpasswordEncoder().encode(novoUsuario.getSenha()));
+		novoUsuario.setPapel("NOVO");
 		repositorio.save(novoUsuario);
 	}
 
