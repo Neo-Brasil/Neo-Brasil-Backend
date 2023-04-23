@@ -52,7 +52,7 @@ public class ControleCliente {
 		repositorioCliente.save(novoCliente);
 	}
 	@GetMapping("/listagem/clientes")
-	@PreAuthorize("hasAnyAuthority('ADM','COMERCIAL')")
+	@PreAuthorize("hasAnyAuthority('ADM','COMERCIAL', 'FINANCEIRO')")
 	public List<Cliente> obterClientes(){
 		List<Cliente> clientes = repositorioCliente.findAll();
 		return clientes;

@@ -43,13 +43,6 @@ public class ControleUsuario {
                 .collect(Collectors.toList());
 		novoUsuario.setSetor(setores.get(areas.indexOf(novoUsuario.getSetor().getArea())));
 		novoUsuario.setSenha(configuracoes.getpasswordEncoder().encode(novoUsuario.getSenha()));
-		if (novoUsuario.getSetor().getArea().equals("Administrador")) {
-			novoUsuario.setPapel("ADM");
-		} else if (novoUsuario.getSetor().getArea().equals("Comercial")) {
-			novoUsuario.setPapel("COMERCIAL");
-			} else {
-				novoUsuario.setPapel("FINANCEIRO");
-			}
 		repositorio.save(novoUsuario);
 	}
 
