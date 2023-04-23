@@ -10,6 +10,9 @@ public class SetorAtualizador {
 			if (!verificador.verificar(atualizacao.getArea())) {
 				setor.setArea(atualizacao.getArea());
 			}
+			if (!(null == atualizacao.getId())) {
+				setor.setId(atualizacao.getId());
+			}
 		}
 	}
 }
