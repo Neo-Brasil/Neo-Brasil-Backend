@@ -1,18 +1,14 @@
 package com.fatec.aplicacao.recursos;
 
+
 import com.fatec.aplicacao.modelo.Setor;
+import com.fatec.aplicacao.modelo.Usuario;
 
 public class SetorAtualizador {
-	private StringVerificadorNulo verificador = new StringVerificadorNulo();
-
-	public void atualizar(Setor setor, Setor atualizacao) {
+	
+	public void atualizar(Usuario usuario, Setor atualizacao) {
 		if (atualizacao != null) {
-			if (!verificador.verificar(atualizacao.getArea())) {
-				setor.setArea(atualizacao.getArea());
-			}
-			if (!(null == atualizacao.getId())) {
-				setor.setId(atualizacao.getId());
-			}
+			usuario.setSetor(atualizacao);
 		}
 	}
 }

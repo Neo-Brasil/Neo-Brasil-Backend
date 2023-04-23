@@ -24,13 +24,10 @@ public class UsuarioAtualizador {
 		if (!verificador.verificar(atualizacao.getPapel())) {
 			usuario.setPapel(atualizacao.getPapel());
 		}
-		
-		
-		
 	}
 
 	public void atualizar(Usuario usuario, Usuario atualizacao) {
 		atualizarDados(usuario, atualizacao);
-		setorAtualizador.atualizar(usuario.getSetor(), atualizacao.getSetor());
+		setorAtualizador.atualizar(usuario, atualizacao.getSetor());
 	}
 }
