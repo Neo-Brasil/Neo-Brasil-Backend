@@ -9,13 +9,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -39,9 +37,7 @@ public class Usuario implements UserDetails{
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String senha;
 	@Column
-	private Boolean autorizado;
-	@Column
-	private Integer setor;
+	private String autorizado;
 	@Column
 	private String papel;
 	
@@ -57,11 +53,11 @@ public class Usuario implements UserDetails{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public Integer getSetor() {
-		return setor;
+	public String getAutorizado() {
+		return autorizado;
 	}
-	public void setSetor(Integer setor) {
-		this.setor = setor;
+	public void setAutorizado(String autorizado) {
+		this.autorizado = autorizado;
 	}
 	
 	@Override

@@ -16,16 +16,12 @@ public class UsuarioAtualizador {
 		if (!verificador.verificar(atualizacao.getSenha())) {
 			usuario.setSenha(atualizacao.getSenha());
 		}
-		if (!(null == atualizacao.getAutorizado())) {
+		if (!verificador.verificar(atualizacao.getAutorizado())) {
 			usuario.setAutorizado(atualizacao.getAutorizado());
-		}
-		if (!(null == atualizacao.getSetor())) {
-			usuario.setSetor(atualizacao.getSetor());
 		}
 		if (!verificador.verificar(atualizacao.getPapel())) {
 			usuario.setPapel(atualizacao.getPapel());
 		}
-		
 	}
 
 	public void atualizar(Usuario usuario, Usuario atualizacao) {

@@ -170,10 +170,9 @@ public class AplicacaoApplication implements CommandLineRunner {
 			usuario.setNome("ADM");
 			usuario.setEmail("administrador@adm.com");
 			usuario.setSenha("$2a$12$fS24..3i0TKeZL0xEGteq.j8wwy7dgDug6VAyZVA6NtxNNm1Q1Kli");
-			usuario.setAutorizado(true);
+			usuario.setAutorizado("sim");
 			
 			usuario.setPapel("ADM");
-			usuario.setSetor(1);
 			
 			repositorioUsuario.save(usuario);
 			
@@ -181,9 +180,8 @@ public class AplicacaoApplication implements CommandLineRunner {
 			usuario.setNome("COM");
 			usuario.setEmail("comercial@com.com");
 			usuario.setSenha("$2a$12$fS24..3i0TKeZL0xEGteq.j8wwy7dgDug6VAyZVA6NtxNNm1Q1Kli");
-			usuario.setAutorizado(true);
+			usuario.setAutorizado("sim");
 			
-			usuario.setSetor(2);
 			usuario.setPapel("COMERCIAL");
 			
 			repositorioUsuario.save(usuario);
@@ -192,9 +190,8 @@ public class AplicacaoApplication implements CommandLineRunner {
 			usuario.setNome("FIN");
 			usuario.setEmail("financeiro@fin.com");
 			usuario.setSenha("$2a$12$fS24..3i0TKeZL0xEGteq.j8wwy7dgDug6VAyZVA6NtxNNm1Q1Kli");
-			usuario.setAutorizado(true);
+			usuario.setAutorizado("sim");
 			
-			usuario.setSetor(3);
 			usuario.setPapel("FINANCEIRO");
 			
 			repositorioUsuario.save(usuario);
