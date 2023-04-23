@@ -40,8 +40,8 @@ public class Usuario implements UserDetails{
 	private String senha;
 	@Column
 	private Boolean autorizado;
-	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-	private Setor setor;
+	@Column
+	private Integer setor;
 	@Column
 	private String papel;
 	
@@ -57,25 +57,10 @@ public class Usuario implements UserDetails{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	/*
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	
-	public String getSenha() {
-		return senha;
-	}
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-	*/
-	public Setor getSetor() {
+	public Integer getSetor() {
 		return setor;
 	}
-	public void setSetor(Setor setor) {
+	public void setSetor(Integer setor) {
 		this.setor = setor;
 	}
 	

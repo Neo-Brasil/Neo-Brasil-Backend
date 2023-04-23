@@ -10,11 +10,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.fatec.aplicacao.modelo.Cliente;
 import com.fatec.aplicacao.modelo.Endereco;
-import com.fatec.aplicacao.modelo.Setor;
 import com.fatec.aplicacao.modelo.Titulos;
 import com.fatec.aplicacao.modelo.Usuario;
 import com.fatec.aplicacao.repositorio.RepositorioCliente;
-import com.fatec.aplicacao.repositorio.RepositorioSetor;
 import com.fatec.aplicacao.repositorio.RepositorioUsuario;
 
 @SpringBootApplication
@@ -24,8 +22,6 @@ public class AplicacaoApplication implements CommandLineRunner {
 	public RepositorioCliente repositorio;
 	@Autowired
 	public RepositorioUsuario repositorioUsuario;
-	@Autowired
-	private RepositorioSetor repositorioSetor;
 	
 	public static void main(String[] args) {
 		
@@ -169,8 +165,6 @@ public class AplicacaoApplication implements CommandLineRunner {
 			cliente.setEndereco(end);
 			cliente.getTitulos().add(tit);
 			repositorio.save(cliente);
-			
-			Setor seto = new Setor();
 		
 			Usuario usuario = new Usuario();
 			usuario.setNome("ADM");
@@ -178,11 +172,8 @@ public class AplicacaoApplication implements CommandLineRunner {
 			usuario.setSenha("$2a$12$fS24..3i0TKeZL0xEGteq.j8wwy7dgDug6VAyZVA6NtxNNm1Q1Kli");
 			usuario.setAutorizado(true);
 			
-			seto = new Setor();
-			seto.setArea("ADMINISTRADOR");
-			
 			usuario.setPapel("ADM");
-			usuario.setSetor(seto);
+			usuario.setSetor(1);
 			
 			repositorioUsuario.save(usuario);
 			
@@ -192,10 +183,7 @@ public class AplicacaoApplication implements CommandLineRunner {
 			usuario.setSenha("$2a$12$fS24..3i0TKeZL0xEGteq.j8wwy7dgDug6VAyZVA6NtxNNm1Q1Kli");
 			usuario.setAutorizado(true);
 			
-			seto = new Setor();
-			seto.setArea("COMERCIAL");
-			
-			usuario.setSetor(seto);
+			usuario.setSetor(2);
 			usuario.setPapel("COMERCIAL");
 			
 			repositorioUsuario.save(usuario);
@@ -206,10 +194,7 @@ public class AplicacaoApplication implements CommandLineRunner {
 			usuario.setSenha("$2a$12$fS24..3i0TKeZL0xEGteq.j8wwy7dgDug6VAyZVA6NtxNNm1Q1Kli");
 			usuario.setAutorizado(true);
 			
-			seto = new Setor();
-			seto.setArea("FINANCEIRO");
-			
-			usuario.setSetor(seto);
+			usuario.setSetor(3);
 			usuario.setPapel("FINANCEIRO");
 			
 			repositorioUsuario.save(usuario);

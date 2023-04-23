@@ -1,7 +1,6 @@
 package com.fatec.aplicacao.controle;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,11 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fatec.aplicacao.configuracoes.seguranca.Configuracoes;
-import com.fatec.aplicacao.modelo.Setor;
 import com.fatec.aplicacao.modelo.Usuario;
 import com.fatec.aplicacao.recursos.Selecionador;
 import com.fatec.aplicacao.recursos.UsuarioAtualizador;
-import com.fatec.aplicacao.repositorio.RepositorioSetor;
 import com.fatec.aplicacao.repositorio.RepositorioUsuario;
 
 @RestController
@@ -32,16 +29,8 @@ public class ControleUsuario {
 	@Autowired
 	private Configuracoes configuracoes;
 	
-	@Autowired
-	private RepositorioSetor repositorioSetor;
-	
 	@PostMapping("/cadastro/usuario")
 	public void cadastrar(@RequestBody Usuario novoUsuario) {
-		List<Setor> setores = repositorioSetor.findAll();
-		List<String> areas = setores.stream()
-                .map(Setor::getArea)
-                .collect(Collectors.toList());
-		novoUsuario.setSetor(setores.get(areas.indexOf(novoUsuario.getSetor().getArea())));
 		novoUsuario.setSenha(configuracoes.getpasswordEncoder().encode(novoUsuario.getSenha()));
 		novoUsuario.setPapel("NOVO");
 		repositorio.save(novoUsuario);

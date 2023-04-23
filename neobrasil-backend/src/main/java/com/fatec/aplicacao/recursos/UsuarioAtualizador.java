@@ -4,7 +4,6 @@ import com.fatec.aplicacao.modelo.Usuario;
 
 public class UsuarioAtualizador {
 	private StringVerificadorNulo verificador = new StringVerificadorNulo();
-	private SetorAtualizador setorAtualizador = new SetorAtualizador();
 	
 
 	private void atualizarDados(Usuario usuario, Usuario atualizacao) {
@@ -19,15 +18,17 @@ public class UsuarioAtualizador {
 		}
 		if (!(null == atualizacao.getAutorizado())) {
 			usuario.setAutorizado(atualizacao.getAutorizado());
-		
+		}
+		if (!(null == atualizacao.getSetor())) {
+			usuario.setSetor(atualizacao.getSetor());
 		}
 		if (!verificador.verificar(atualizacao.getPapel())) {
 			usuario.setPapel(atualizacao.getPapel());
 		}
+		
 	}
 
 	public void atualizar(Usuario usuario, Usuario atualizacao) {
 		atualizarDados(usuario, atualizacao);
-		setorAtualizador.atualizar(usuario, atualizacao.getSetor());
 	}
 }

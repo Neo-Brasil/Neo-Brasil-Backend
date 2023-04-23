@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 import com.fatec.aplicacao.modelo.Cliente;
 import com.fatec.aplicacao.modelo.Endereco;
 import com.fatec.aplicacao.modelo.Prestacao;
-import com.fatec.aplicacao.modelo.Setor;
 import com.fatec.aplicacao.modelo.Titulos;
 import com.fatec.aplicacao.modelo.Usuario;
 
@@ -69,16 +68,6 @@ public class Selecionador {
 		for (Titulos titulos : titulo) {
 			if (titulos.getId() == id) {
 				selecionado = titulos;
-			}
-		}
-		return selecionado;
-	}
-
-	public static Setor selecionarSetor(List<Setor> setores, long id) {
-		Setor selecionado = null;
-		for (Setor setor : setores) {
-			if (setor.getId() == id) {
-				selecionado = setor;
 			}
 		}
 		return selecionado;
