@@ -19,6 +19,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+@SuppressWarnings("serial")
 @Data
 @Entity
 @Getter
@@ -31,7 +32,7 @@ public class Usuario implements UserDetails{
 	private Long id;
 	@Column
 	private String nome;
-	@Column
+	@Column(nullable = false, unique = true)
 	private String email;
 	@Column
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
