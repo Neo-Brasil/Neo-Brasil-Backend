@@ -57,8 +57,8 @@ public class PrestacoesFunc {
 			return prestacoesPeriodo;
 		}
 		
-		public static float contarPrecos(List<Prestacao> prestacoes) {
-			float somaTotal = 0;
+		public static double contarPrecos(List<Prestacao> prestacoes) {
+			double somaTotal = 0;
 			for (Prestacao prestacao : prestacoes) {
 				somaTotal = somaTotal + prestacao.getPreco();
 			}

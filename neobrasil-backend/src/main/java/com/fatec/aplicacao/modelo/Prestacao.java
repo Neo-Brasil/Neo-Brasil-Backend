@@ -25,7 +25,7 @@ public class Prestacao {
 	@Column
 	private String data_pagamento;
 	@Column
-	private float preco;
+	private double preco;
 	@Column
 	private String situacao;
 	public Long getId() {
@@ -46,11 +46,11 @@ public class Prestacao {
 	public void setData_pagamento(String data_pagamento) {
 		this.data_pagamento = data_pagamento;
 	}
-	public float getPreco() {
+	public double getPreco() {
 		return preco;
 	}
-	public void setPreco(float preco) {
-		this.preco = preco;
+	public void setPreco(double d) {
+		this.preco = d;
 	}
 	public String getSituacao() {
 		return situacao;

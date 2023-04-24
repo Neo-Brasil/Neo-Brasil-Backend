@@ -1,33 +1,33 @@
 package com.fatec.aplicacao.modelo;
 
 public class RelatorioValores {
-	private float expectativa;
+	private double expectativa;
 	
-	private float faltante;
+	private double faltante;
 	
-	private float recebido;
+	private double recebido;
 
-	public float getExpectativa() {
+	public double getExpectativa() {
 		return expectativa;
 	}
 
-	public void setExpectativa(float expectativa) {
-		this.expectativa = expectativa;
+	public void setExpectativa(double expectativa2) {
+		this.expectativa = expectativa2;
 	}
 
-	public float getFaltante() {
+	public double getFaltante() {
 		return faltante;
 	}
 
-	public void setFaltante(float faltante) {
-		this.faltante = faltante;
+	public void setFaltante(double faltando) {
+		this.faltante = faltando;
 	}
 
-	public float getRecebido() {
+	public double getRecebido() {
 		return recebido;
 	}
 
-	public void setRecebido(float recebido) {
-		this.recebido = recebido;
+	public void setRecebido(double recebido2) {
+		this.recebido = recebido2;
 	}
 }

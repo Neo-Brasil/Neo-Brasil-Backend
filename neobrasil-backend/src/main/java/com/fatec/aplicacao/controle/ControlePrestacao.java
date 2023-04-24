@@ -70,15 +70,17 @@ public class ControlePrestacao {
 	public RelatorioValores relatorioValores(@PathVariable String data_inicio, @PathVariable String data_final) throws ParseException {
 		List<Titulos> titulos = repositorioTitulos.findAll();
 		List<Prestacao> prestacoes = new ArrayList<>();
+		if (data_final.equalsIgnoreCase("0000-00-00")) {
+			data_final = "9000-00-00";}
 		for (Titulos titulo : titulos) {
 			for (Prestacao prestacao : PrestacoesFunc.listarPrestacoesPeriodo(titulo, data_inicio, data_final)) {
 				prestacoes.add(prestacao);
 			}
 		}
 		RelatorioValores relatorio = new RelatorioValores();
-		float expectativa = 0;
-		float recebido = 0;
-		float faltando = 0;
+		double expectativa = 0;
+		double recebido = 0;
+		double faltando = 0;
 		for (Prestacao prestacao : prestacoes) {
 			if (prestacao.getSituacao().equals("Creditado")) {
 				recebido = recebido + prestacao.getPreco();
@@ -98,6 +100,8 @@ public class ControlePrestacao {
 	@PreAuthorize("hasAnyAuthority('ADM','COMERCIAL', 'FINANCEIRO')")
 	public List<Prestacao> listarTituloPrestacoesPeriodo(@PathVariable long id, @PathVariable String data_inicio, @PathVariable String data_final) throws ParseException {
 		Titulos titulo = repositorioTitulos.getById(id);
+		if (data_final.equalsIgnoreCase("0000-00-00")) {
+			data_final = "9000-00-00";}
 		return PrestacoesFunc.listarPrestacoesPeriodo(titulo, data_inicio, data_final);
 	}
 	
