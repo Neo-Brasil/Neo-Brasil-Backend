@@ -68,90 +68,90 @@ public class InseridorBanco {
 		
 		Titulos tit = new Titulos();
 		tit.setTitulo("Gold");
-		tit.setPreco(900);
+		tit.setPreco(90);
 		tit.setTempo_credito(3);
 		
 		Prestacao prestacao = new Prestacao();
 		prestacao.setData_vencimento("2023-02-24");
 		prestacao.setData_pagamento("2023-02-22");
-		prestacao.setPreco(900);
-		prestacao.setSituacao("Inadimplente");		
+		prestacao.setPreco(90);
+		prestacao.setSituacao("Creditado");		
 		tit.getPrestacoes().add(prestacao);
 		
 		prestacao = new Prestacao();
 		prestacao.setData_vencimento("2023-03-24");
 		prestacao.setData_pagamento("0000-00-00");
-		prestacao.setPreco(900);
+		prestacao.setPreco(90);
 		prestacao.setSituacao("Inadimplente");
 		tit.getPrestacoes().add(prestacao);
 		
 		prestacao = new Prestacao();
 		prestacao.setData_vencimento("2023-04-24");
 		prestacao.setData_pagamento("2023-04-23");
-		prestacao.setPreco(900);
+		prestacao.setPreco(90);
 		prestacao.setSituacao("Pago");
 		tit.getPrestacoes().add(prestacao);
 		
 		prestacao = new Prestacao();
 		prestacao.setData_vencimento("2023-05-24");
 		prestacao.setData_pagamento("0000-00-00");
-		prestacao.setPreco(900);
+		prestacao.setPreco(90);
 		prestacao.setSituacao("Em aberto");
 		tit.getPrestacoes().add(prestacao);
 		
 		prestacao = new Prestacao();
 		prestacao.setData_vencimento("2023-06-24");
 		prestacao.setData_pagamento("0000-00-00");
-		prestacao.setPreco(900);
+		prestacao.setPreco(90);
 		prestacao.setSituacao("Em aberto");
 		tit.getPrestacoes().add(prestacao);
 		
 		prestacao = new Prestacao();
 		prestacao.setData_vencimento("2023-07-24");
 		prestacao.setData_pagamento("0000-00-00");
-		prestacao.setPreco(900);
+		prestacao.setPreco(90);
 		prestacao.setSituacao("Em aberto");
 		tit.getPrestacoes().add(prestacao);
 		
 		prestacao = new Prestacao();
 		prestacao.setData_vencimento("2023-08-24");
 		prestacao.setData_pagamento("0000-00-00");
-		prestacao.setPreco(900);
+		prestacao.setPreco(90);
 		prestacao.setSituacao("Em aberto");
 		tit.getPrestacoes().add(prestacao);
 		
 		prestacao = new Prestacao();
 		prestacao.setData_vencimento("2023-09-24");
 		prestacao.setData_pagamento("0000-00-00");
-		prestacao.setPreco(900);
+		prestacao.setPreco(90);
 		prestacao.setSituacao("Em aberto");
 		tit.getPrestacoes().add(prestacao);
 		
 		prestacao = new Prestacao();
 		prestacao.setData_vencimento("2023-10-24");
 		prestacao.setData_pagamento("0000-00-00");
-		prestacao.setPreco(900);
+		prestacao.setPreco(90);
 		prestacao.setSituacao("Em aberto");
 		tit.getPrestacoes().add(prestacao);
 		
 		prestacao = new Prestacao();
 		prestacao.setData_vencimento("2023-11-24");
 		prestacao.setData_pagamento("0000-00-00");
-		prestacao.setPreco(900);
+		prestacao.setPreco(90);
 		prestacao.setSituacao("Em aberto");
 		tit.getPrestacoes().add(prestacao);
 		
 		prestacao = new Prestacao();
 		prestacao.setData_vencimento("2023-12-24");
 		prestacao.setData_pagamento("0000-00-00");
-		prestacao.setPreco(900);
+		prestacao.setPreco(90);
 		prestacao.setSituacao("Em aberto");
 		tit.getPrestacoes().add(prestacao);
 		
 		prestacao = new Prestacao();
 		prestacao.setData_vencimento("2024-01-24");
 		prestacao.setData_pagamento("0000-00-00");
-		prestacao.setPreco(900);
+		prestacao.setPreco(90);
 		prestacao.setSituacao("Em aberto");
 		tit.getPrestacoes().add(prestacao);
 				
@@ -175,90 +175,90 @@ public class InseridorBanco {
 		
 		tit = new Titulos();
 		tit.setTitulo("Silver");
-		tit.setPreco(600);
+		tit.setPreco(60);
 		tit.setTempo_credito(3);
 
 		prestacao = new Prestacao();
 		prestacao.setData_vencimento("2023-04-24");
 		prestacao.setData_pagamento("2023-04-24");
-		prestacao.setPreco(600);
+		prestacao.setPreco(60);
 		prestacao.setSituacao("Pago");
 		tit.getPrestacoes().add(prestacao);
 			
 		prestacao = new Prestacao();
 		prestacao.setData_vencimento("2023-05-24");
 		prestacao.setData_pagamento("0000-00-00");
-		prestacao.setPreco(600);
+		prestacao.setPreco(60);
 		prestacao.setSituacao("Em aberto");
 		tit.getPrestacoes().add(prestacao);
 		
 		prestacao = new Prestacao();
 		prestacao.setData_vencimento("2023-06-24");
 		prestacao.setData_pagamento("0000-00-00");
-		prestacao.setPreco(600);
+		prestacao.setPreco(60);
 		prestacao.setSituacao("Em aberto");
 		tit.getPrestacoes().add(prestacao);
 		
 		prestacao = new Prestacao();
 		prestacao.setData_vencimento("2023-07-24");
 		prestacao.setData_pagamento("0000-00-00");
-		prestacao.setPreco(600);
+		prestacao.setPreco(60);
 		prestacao.setSituacao("Em aberto");
 		tit.getPrestacoes().add(prestacao);
 		
 		prestacao = new Prestacao();
 		prestacao.setData_vencimento("2023-08-24");
 		prestacao.setData_pagamento("0000-00-00");
-		prestacao.setPreco(600);
+		prestacao.setPreco(60);
 		prestacao.setSituacao("Em aberto");
 		tit.getPrestacoes().add(prestacao);
 		
 		prestacao = new Prestacao();
 		prestacao.setData_vencimento("2023-09-24");
 		prestacao.setData_pagamento("0000-00-00");
-		prestacao.setPreco(600);
+		prestacao.setPreco(60);
 		prestacao.setSituacao("Em aberto");
 		tit.getPrestacoes().add(prestacao);
 		
 		prestacao = new Prestacao();
 		prestacao.setData_vencimento("2023-10-24");
 		prestacao.setData_pagamento("0000-00-00");
-		prestacao.setPreco(600);
+		prestacao.setPreco(60);
 		prestacao.setSituacao("Em aberto");
 		tit.getPrestacoes().add(prestacao);
 		
 		prestacao = new Prestacao();
 		prestacao.setData_vencimento("2023-11-24");
 		prestacao.setData_pagamento("0000-00-00");
-		prestacao.setPreco(600);
+		prestacao.setPreco(60);
 		prestacao.setSituacao("Em aberto");
 		tit.getPrestacoes().add(prestacao);
 		
 		prestacao = new Prestacao();
 		prestacao.setData_vencimento("2023-12-24");
 		prestacao.setData_pagamento("0000-00-00");
-		prestacao.setPreco(600);
+		prestacao.setPreco(60);
 		prestacao.setSituacao("Em aberto");
 		tit.getPrestacoes().add(prestacao);
 		
 		prestacao = new Prestacao();
 		prestacao.setData_vencimento("2024-01-24");
 		prestacao.setData_pagamento("0000-00-00");
-		prestacao.setPreco(600);
+		prestacao.setPreco(60);
 		prestacao.setSituacao("Em aberto");
 		tit.getPrestacoes().add(prestacao);
 		
 		prestacao = new Prestacao();
 		prestacao.setData_vencimento("2024-02-24");
 		prestacao.setData_pagamento("0000-00-00");
-		prestacao.setPreco(600);
+		prestacao.setPreco(60);
 		prestacao.setSituacao("Em aberto");
 		tit.getPrestacoes().add(prestacao);
 		
 		prestacao = new Prestacao();
 		prestacao.setData_vencimento("2024-03-24");
 		prestacao.setData_pagamento("0000-00-00");
-		prestacao.setPreco(600);
+		prestacao.setPreco(60);
 		prestacao.setSituacao("Em aberto");
 		tit.getPrestacoes().add(prestacao);
 				
@@ -276,96 +276,96 @@ public class InseridorBanco {
 		end.setCep("15198246");
 		end.setLogradouro("Rua Amorim");
 		end.setNumero("230");
-		end.setBairro("");
+		end.setBairro("Centro");
 		end.setLocalidade("São José dos Campos");
 		end.setUF("SP");
 		
 		tit = new Titulos();
 		tit.setTitulo("Bronze");
-		tit.setPreco(300);
+		tit.setPreco(30);
 		tit.setTempo_credito(3);
 
 		prestacao = new Prestacao();
 		prestacao.setData_vencimento("2023-03-24");
 		prestacao.setData_pagamento("2023-03-24");
-		prestacao.setPreco(300);
+		prestacao.setPreco(30);
 		prestacao.setSituacao("Creditado");
 		tit.getPrestacoes().add(prestacao);
 			
 		prestacao = new Prestacao();
 		prestacao.setData_vencimento("2023-04-24");
 		prestacao.setData_pagamento("2023-04-23");
-		prestacao.setPreco(300);
+		prestacao.setPreco(30);
 		prestacao.setSituacao("Pago");
 		tit.getPrestacoes().add(prestacao);
 		
 		prestacao = new Prestacao();
 		prestacao.setData_vencimento("2023-05-24");
 		prestacao.setData_pagamento("0000-05-00");
-		prestacao.setPreco(300);
+		prestacao.setPreco(30);
 		prestacao.setSituacao("Em aberto");
 		tit.getPrestacoes().add(prestacao);
 		
 		prestacao = new Prestacao();
 		prestacao.setData_vencimento("2023-06-24");
 		prestacao.setData_pagamento("0000-06-00");
-		prestacao.setPreco(300);
+		prestacao.setPreco(30);
 		prestacao.setSituacao("Em aberto");
 		tit.getPrestacoes().add(prestacao);
 		
 		prestacao = new Prestacao();
 		prestacao.setData_vencimento("2023-07-24");
 		prestacao.setData_pagamento("0000-00-00");
-		prestacao.setPreco(300);
+		prestacao.setPreco(30);
 		prestacao.setSituacao("Em aberto");
 		tit.getPrestacoes().add(prestacao);
 		
 		prestacao = new Prestacao();
 		prestacao.setData_vencimento("2023-08-24");
 		prestacao.setData_pagamento("0000-00-00");
-		prestacao.setPreco(300);
+		prestacao.setPreco(30);
 		prestacao.setSituacao("Em aberto");
 		tit.getPrestacoes().add(prestacao);
 		
 		prestacao = new Prestacao();
 		prestacao.setData_vencimento("2023-09-24");
 		prestacao.setData_pagamento("0000-00-00");
-		prestacao.setPreco(300);
+		prestacao.setPreco(30);
 		prestacao.setSituacao("Em aberto");
 		tit.getPrestacoes().add(prestacao);
 		
 		prestacao = new Prestacao();
 		prestacao.setData_vencimento("2023-10-24");
 		prestacao.setData_pagamento("0000-00-00");
-		prestacao.setPreco(300);
+		prestacao.setPreco(30);
 		prestacao.setSituacao("Em aberto");
 		tit.getPrestacoes().add(prestacao);
 		
 		prestacao = new Prestacao();
 		prestacao.setData_vencimento("2023-11-24");
 		prestacao.setData_pagamento("0000-00-00");
-		prestacao.setPreco(300);
+		prestacao.setPreco(30);
 		prestacao.setSituacao("Em aberto");
 		tit.getPrestacoes().add(prestacao);
 		
 		prestacao = new Prestacao();
 		prestacao.setData_vencimento("2023-12-24");
 		prestacao.setData_pagamento("0000-00-00");
-		prestacao.setPreco(300);
+		prestacao.setPreco(30);
 		prestacao.setSituacao("Em aberto");
 		tit.getPrestacoes().add(prestacao);
 		
 		prestacao = new Prestacao();
 		prestacao.setData_vencimento("2024-01-24");
 		prestacao.setData_pagamento("0000-00-00");
-		prestacao.setPreco(300);
+		prestacao.setPreco(30);
 		prestacao.setSituacao("Em aberto");
 		tit.getPrestacoes().add(prestacao);
 		
 		prestacao = new Prestacao();
 		prestacao.setData_vencimento("2024-02-24");
 		prestacao.setData_pagamento("0000-00-00");
-		prestacao.setPreco(300);
+		prestacao.setPreco(30);
 		prestacao.setSituacao("Em aberto");
 		tit.getPrestacoes().add(prestacao);
 				
