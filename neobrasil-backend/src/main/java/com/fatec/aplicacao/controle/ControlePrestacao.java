@@ -78,18 +78,18 @@ public class ControlePrestacao {
 			}
 		}
 		RelatorioValores relatorio = new RelatorioValores();
-		double expectativa = 0;
+		double creditar = 0;
 		double recebido = 0;
-		double faltando = 0;
+		double receber = 0;
 		for (Prestacao prestacao : prestacoes) {
 			if (prestacao.getSituacao().equals("Creditado")) {
 				recebido = recebido + prestacao.getPreco();
 			}else if (prestacao.getSituacao().equals("Pago")) {
-				expectativa = expectativa + prestacao.getPreco();
-			}else faltando = faltando + prestacao.getPreco();
+				creditar = creditar + prestacao.getPreco();
+			}else receber = receber + prestacao.getPreco();
 		}
-		relatorio.setExpectativa(expectativa);
-		relatorio.setFaltante(faltando);
+		relatorio.setCreditar(creditar);
+		relatorio.setReceber(receber);
 		relatorio.setRecebido(recebido);
 		return relatorio;
 	}
