@@ -9,7 +9,7 @@ import com.fatec.aplicacao.modelo.Titulos;
 
 public class PrestacoesFunc {
 	
-	public static void atualizarTituloPrestacoes(Titulos titulo, int dataAtual) {
+	public static void atualizarTituloPrestacoes(Titulos titulo, int dataAtual) throws NumberFormatException, ParseException {
 		for (Prestacao prestacao: titulo.getPrestacoes()) {
 			if ( !prestacao.getSituacao().equalsIgnoreCase("Pago")) {
 				int data_vencimento = Integer.parseInt(prestacao.getData_vencimento().replace("-", ""));
@@ -17,8 +17,9 @@ public class PrestacoesFunc {
 					prestacao.setSituacao("Inadimplente");
 					}
 			} else if (
-				Integer.parseInt(prestacao.getData_pagamento().replace("-", "")) +
-				titulo.getTempo_credito() <= dataAtual) {
+				Integer.parseInt(DataManipulacao.AdicionarDias(
+						prestacao.getData_pagamento(), titulo.getTempo_credito()).replace("-", ""))
+				<= dataAtual) {
 				prestacao.setSituacao("Creditado");
 				}
 			}
