@@ -11,6 +11,7 @@ public class PrestacoesFunc {
 	
 	public static void atualizarTituloPrestacoes(Titulos titulo, int dataAtual) throws NumberFormatException, ParseException {
 		for (Prestacao prestacao: titulo.getPrestacoes()) {
+			if (!prestacao.getSituacao().equalsIgnoreCase("Creditado")) {
 			if ( !prestacao.getSituacao().equalsIgnoreCase("Pago")) {
 				int data_vencimento = Integer.parseInt(prestacao.getData_vencimento().replace("-", ""));
 				if (data_vencimento <= dataAtual) {
@@ -22,7 +23,7 @@ public class PrestacoesFunc {
 				<= dataAtual) {
 				prestacao.setSituacao("Creditado");
 				}
-			}
+			}}
 		}
 		
 		public static Titulos criarNovaPrestacao(Titulos titulo) throws ParseException {
