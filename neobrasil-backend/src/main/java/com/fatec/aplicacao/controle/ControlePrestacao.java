@@ -41,7 +41,7 @@ public class ControlePrestacao {
 	
 	@GetMapping("/listagem/titulos/atualizar_situacao")
 	@PreAuthorize("hasAnyAuthority('ADM','FINANCEIRO')")
-	public void obterTitulosAtualizarSituacao(){
+	public void obterTitulosAtualizarSituacao() throws NumberFormatException, ParseException{
 		List<Cliente> clientes = repositorioCliente.findAll();
 		int data_atual = Integer.parseInt(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")).replace("/", ""));
 		for (Cliente cliente : clientes ) {
