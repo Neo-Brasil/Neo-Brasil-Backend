@@ -30,7 +30,7 @@ public class PrestacoesFunc {
 			Prestacao novaPrestacao = new Prestacao();
 			List<Prestacao> prestacoes = titulo.getPrestacoes();
 			Prestacao ultimaPrestacao = prestacoes.get(prestacoes.size() - 1);
-			novaPrestacao.setData_vencimento(DataManipulacao.AdicionarDias(ultimaPrestacao.getData_vencimento(), 30));
+			novaPrestacao.setData_vencimento(DataManipulacao.AdicionarDias(ultimaPrestacao.getData_vencimento(), 1));
 			novaPrestacao.setPreco(ultimaPrestacao.getPreco());
 			novaPrestacao.setSituacao("Em aberto");
 			novaPrestacao.setData_pagamento("0000-00-00");

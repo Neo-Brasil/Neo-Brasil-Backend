@@ -39,7 +39,7 @@ public class ControleCliente {
 		String data_atual = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")).replace("/", "-");
 		for (Titulos titulo : titulos) {
 			List<Prestacao> prestacoes = titulo.getPrestacoes();
-			List<String> listaDatas = DataManipulacao.CriarDatas(data_atual);
+			List<String> listaDatas = DataManipulacao.CriarDatas("2023-05-31");
 			for (int i = 0; i < 12; i++) {
 				Prestacao prestacao = new Prestacao();
 				prestacao.setSituacao("Em aberto");

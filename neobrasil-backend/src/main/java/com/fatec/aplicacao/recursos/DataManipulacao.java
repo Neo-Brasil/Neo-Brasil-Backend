@@ -12,16 +12,17 @@ public class DataManipulacao {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar c = Calendar.getInstance();
         c.setTime(sdf.parse(dataStr));
-        c.add(Calendar.DATE, dias);
+        c.add(Calendar.MONTH, dias);
         String data = sdf.format(c.getTime()); 
         return data;
 	}
 	
 	public static List<String> CriarDatas(String dataInicio) throws ParseException {
 		List<String> listaDatas = new ArrayList<>();
-		listaDatas.add(DataManipulacao.AdicionarDias(dataInicio, 30));
+		String primeiraData = DataManipulacao.AdicionarDias(dataInicio, 1);
+		listaDatas.add(primeiraData);
 		for (int i = 1; i < 12; i++) {
-			listaDatas.add(DataManipulacao.AdicionarDias(listaDatas.get(i-1), 30));
+			listaDatas.add(DataManipulacao.AdicionarDias(primeiraData, i));
 		}
 		return listaDatas;
 	}
