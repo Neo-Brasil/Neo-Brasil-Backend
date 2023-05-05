@@ -36,10 +36,9 @@ public class ControleCliente {
 	@PreAuthorize("hasAnyAuthority('ADM','COMERCIAL')")
 	public void cadastrar(@RequestBody Cliente novoCliente) throws ParseException {
 		List<Titulos> titulos = novoCliente.getTitulos();
-		String data_atual = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")).replace("/", "-");
 		for (Titulos titulo : titulos) {
 			List<Prestacao> prestacoes = titulo.getPrestacoes();
-			List<String> listaDatas = DataManipulacao.CriarDatas("2023-05-31");
+			List<String> listaDatas = DataManipulacao.CriarDatas(titulo.getData_vencimento());
 			for (int i = 0; i < 12; i++) {
 				Prestacao prestacao = new Prestacao();
 				prestacao.setSituacao("Em aberto");

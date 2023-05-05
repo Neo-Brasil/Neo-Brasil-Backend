@@ -30,7 +30,17 @@ public class PrestacoesFunc {
 			Prestacao novaPrestacao = new Prestacao();
 			List<Prestacao> prestacoes = titulo.getPrestacoes();
 			Prestacao ultimaPrestacao = prestacoes.get(prestacoes.size() - 1);
-			novaPrestacao.setData_vencimento(DataManipulacao.AdicionarDias(ultimaPrestacao.getData_vencimento(), 1));
+			if (!ultimaPrestacao.getData_vencimento().substring(7, 10).equalsIgnoreCase(
+					titulo.getData_vencimento().substring(7, 10))) {
+				String dia = titulo.getData_vencimento().substring(7, 10);
+				for (int i = prestacoes.size()-1; i>0; i--) {
+					if (prestacoes.get(i).getData_vencimento().substring(7, 10).equalsIgnoreCase(dia)) {
+						novaPrestacao.setData_vencimento(
+						DataManipulacao.AdicionarDias(prestacoes.get(i).getData_vencimento(), prestacoes.size()-i)
+						);
+					}
+				}
+			} else {novaPrestacao.setData_vencimento(DataManipulacao.AdicionarDias(ultimaPrestacao.getData_vencimento(), 1));}
 			novaPrestacao.setPreco(ultimaPrestacao.getPreco());
 			novaPrestacao.setSituacao("Em aberto");
 			novaPrestacao.setData_pagamento("0000-00-00");

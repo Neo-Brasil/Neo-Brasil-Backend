@@ -32,6 +32,8 @@ public class Titulos {
 	@Column
 	private float preco;
 	@Column
+	private String data_vencimento;
+	@Column
 	private int ultimo_valor_pago;
 	@Column
 	private int tempo_credito;
