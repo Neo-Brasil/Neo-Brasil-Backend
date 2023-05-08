@@ -24,7 +24,7 @@ public class AplicacaoApplication implements CommandLineRunner {
 		configuracao.put("spring.datasource.username", "root"); // usuario
 		configuracao.put("spring.datasource.password", "fatec"); // senha
 		configuracao.put("spring.jpa.show-sql", "true"); // mostrar comandos
-		configuracao.put("spring.jpa.hibernate.ddl-auto", "update"); // criar editar
+		configuracao.put("spring.jpa.hibernate.ddl-auto", "create"); // criar editar
 		
 		SpringApplication app = new SpringApplication(AplicacaoApplication.class);
 		app.setDefaultProperties(configuracao);
