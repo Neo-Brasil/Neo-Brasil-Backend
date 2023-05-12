@@ -92,12 +92,12 @@ public class ControleCliente {
 	}
 	
 	@SuppressWarnings("deprecation")
-	@DeleteMapping("/excluir/cliente/{id}")
+	@DeleteMapping("/excluir/cliente/{id}/{id_usuario}")
 	@PreAuthorize("hasAnyAuthority('ADM','COMERCIAL')")
-	public void excluirCliente(@RequestBody Cliente clienteSelecionado, @PathVariable long id) {
-		Cliente cliente = repositorioCliente.getById(clienteSelecionado.getId());
+	public void excluirCliente(@PathVariable long id,@PathVariable long id_usuario) {
+		Cliente cliente = repositorioCliente.getById(id);
 		Relacao relacao = new Relacao();
-		relacao.setUsuario(repositorioUsuario.getById(id));
+		relacao.setUsuario(repositorioUsuario.getById(id_usuario));
 		String acao = String.format("Exclusão do cliente %s",cliente.getNome());
 		relacao.setAcao(acao);	
 		repositorioCliente.delete(cliente);
