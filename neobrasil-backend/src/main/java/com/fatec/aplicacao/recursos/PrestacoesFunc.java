@@ -30,11 +30,12 @@ public class PrestacoesFunc {
 			Prestacao novaPrestacao = new Prestacao();
 			List<Prestacao> prestacoes = titulo.getPrestacoes();
 			Prestacao ultimaPrestacao = prestacoes.get(prestacoes.size() - 1);
-			if (!ultimaPrestacao.getData_vencimento().substring(7, 10).equalsIgnoreCase(
-					titulo.getData_vencimento().substring(7, 10))) {
-				String dia = titulo.getData_vencimento().substring(7, 10);
+			if (!ultimaPrestacao.getData_vencimento().substring(8).equalsIgnoreCase(
+					titulo.getData_vencimento().substring(8))) {
+				String dia = titulo.getData_vencimento().substring(8);
+				System.out.print("#"+dia+"@");
 				for (int i = prestacoes.size()-1; i>0; i--) {
-					if (prestacoes.get(i).getData_vencimento().substring(7, 10).equalsIgnoreCase(dia)) {
+					if (prestacoes.get(i).getData_vencimento().substring(8).equalsIgnoreCase(dia)) {
 						novaPrestacao.setData_vencimento(
 						DataManipulacao.AdicionarDias(prestacoes.get(i).getData_vencimento(), prestacoes.size()-i)
 						);
