@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fatec.aplicacao.modelo.Cliente;
 import com.fatec.aplicacao.modelo.Prestacao;
+import com.fatec.aplicacao.modelo.Relacao;
 import com.fatec.aplicacao.modelo.RelatorioValores;
 import com.fatec.aplicacao.modelo.Titulos;
 import com.fatec.aplicacao.recursos.PrestacaoAtualizador;
@@ -24,7 +25,9 @@ import com.fatec.aplicacao.recursos.PrestacoesFunc;
 import com.fatec.aplicacao.recursos.Selecionador;
 import com.fatec.aplicacao.repositorio.RepositorioCliente;
 import com.fatec.aplicacao.repositorio.RepositorioPrestacao;
+import com.fatec.aplicacao.repositorio.RepositorioRelacao;
 import com.fatec.aplicacao.repositorio.RepositorioTitulos;
+import com.fatec.aplicacao.repositorio.RepositorioUsuario;
 
 @RestController
 @CrossOrigin
@@ -37,7 +40,13 @@ public class ControlePrestacao {
 	private RepositorioCliente repositorioCliente;
 	
 	@Autowired
+	private RepositorioUsuario repositorioUsuario;
+	
+	@Autowired
 	private RepositorioTitulos repositorioTitulos;
+	
+	@Autowired
+	private RepositorioRelacao repositorioRelacao;
 	
 	@GetMapping("/listagem/titulos/atualizar_situacao")
 	@PreAuthorize("hasAnyAuthority('ADM','FINANCEIRO')")
@@ -54,15 +63,21 @@ public class ControlePrestacao {
 	}
 	
 	@SuppressWarnings("deprecation")
-	@PutMapping("/pagar/prestacao")
+	@PutMapping("/pagar/prestacao/{id}")
 	@PreAuthorize("hasAnyAuthority('ADM','FINANCEIRO')")
-	public void pagarPrestacao(@RequestBody Titulos TituloPrestacaoPaga) throws ParseException {
+	public void pagarPrestacao(@RequestBody Titulos TituloPrestacaoPaga, @PathVariable long id) throws ParseException {
 		Prestacao prestacaoPaga = TituloPrestacaoPaga.getPrestacoes().get(0);
 		Prestacao prestacao = repositorioPrestacao.getById(prestacaoPaga.getId());
 		prestacao.setSituacao("Pago");
 		prestacao.setData_pagamento(prestacaoPaga.getData_pagamento());
+		
+		Relacao relacao = new Relacao();
+		relacao.setUsuario(repositorioUsuario.getById(id));
+		String acao = String.format("Pagamento da prestação de id %s ", prestacao.getId());
+		relacao.setAcao(acao);
 		repositorioPrestacao.save(prestacao);
 		repositorioTitulos.save(PrestacoesFunc.criarNovaPrestacao(repositorioTitulos.getById(TituloPrestacaoPaga.getId())));
+		repositorioRelacao.save(relacao);
 	}
 	
 	@GetMapping("/listagem/prestacoes_valores/periodo/{data_inicio}/{data_final}")
@@ -113,13 +128,17 @@ public class ControlePrestacao {
 	}
 	
 	@SuppressWarnings("deprecation")
-	@PutMapping("/atualizar/prestacao")
+	@PutMapping("/atualizar/prestacao/{id}")
 	@PreAuthorize("hasAnyAuthority('ADM','COMERCIAL', 'FINANCEIRO')")
-	public void atualizarPrestacao(@RequestBody Prestacao atualizacao) {
+	public void atualizarPrestacao(@RequestBody Prestacao atualizacao, @PathVariable long id) {
 		Prestacao prestacao = repositorioPrestacao.getById(atualizacao.getId());
 		PrestacaoAtualizador atualizador = new PrestacaoAtualizador();
-		atualizador.atualizar(prestacao, atualizacao);
+		String acoes = atualizador.atualizar(prestacao, atualizacao);
+		Relacao relacao = new Relacao();
+		relacao.setAcao(acoes);
+		relacao.setUsuario(repositorioUsuario.getById(id));
 		repositorioPrestacao.save(prestacao);
+		repositorioRelacao.save(relacao);
 	}
 	
 }

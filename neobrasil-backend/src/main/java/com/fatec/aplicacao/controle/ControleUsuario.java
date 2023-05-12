@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fatec.aplicacao.configuracoes.seguranca.Configuracoes;
+import com.fatec.aplicacao.modelo.Relacao;
 import com.fatec.aplicacao.modelo.Usuario;
 import com.fatec.aplicacao.recursos.Selecionador;
 import com.fatec.aplicacao.recursos.UsuarioAtualizador;
+import com.fatec.aplicacao.repositorio.RepositorioRelacao;
 import com.fatec.aplicacao.repositorio.RepositorioUsuario;
 
 @RestController
@@ -25,6 +27,9 @@ public class ControleUsuario {
 	
 	@Autowired
 	private RepositorioUsuario repositorio;
+	
+	@Autowired
+	private RepositorioRelacao repositorioRelacao;
 	
 	@Autowired
 	private Configuracoes configuracoes;
@@ -48,19 +53,32 @@ public class ControleUsuario {
 		return Selecionador.selecionarUsuario(usuarios, id);
 	}
 	@SuppressWarnings("deprecation")
-	@PutMapping("/atualizar/usuario")
+	@PutMapping("/atualizar/usuario/{id}")
 	@PreAuthorize("hasAnyAuthority('ADM')")
-	public void atualizarUsuario(@RequestBody Usuario atualizacao) {
+	public void atualizarUsuario(@RequestBody Usuario atualizacao, @PathVariable long id) {
 		Usuario usuario = repositorio.getById(atualizacao.getId());
 		UsuarioAtualizador atualizador = new UsuarioAtualizador();
-		atualizador.atualizar(usuario, atualizacao);
+		Relacao relacao = atualizador.atualizar(usuario, atualizacao);
+		relacao.setUsuario(repositorio.getById(id));
 		repositorio.save(usuario);
+		repositorioRelacao.save(relacao);
 	}
+	
+	
+	
 	@SuppressWarnings("deprecation")
 	@DeleteMapping("/excluir/usuario/{id}")
 	@PreAuthorize("hasAnyAuthority('ADM')")
-	public void excluirCliente(@PathVariable long id) {
-		Usuario usuario = repositorio.getById(id);
+	public void excluirCliente(@RequestBody Usuario usuarioSelecionado, @PathVariable long id) {
+		Usuario usuario = repositorio.getById(usuarioSelecionado.getId());
+		Relacao relacao = new Relacao();
+		relacao.setUsuario(repositorio.getById(id));
+		String acao = String.format("Exclusão do usuário %s",usuario.getNome());
+		relacao.setAcao(acao);
 		repositorio.delete(usuario);
+		repositorioRelacao.save(relacao);
 	}
+	
+	
+	
 }
