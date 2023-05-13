@@ -20,7 +20,7 @@ public class DataManipulacao {
 	public static List<String> CriarDatas(String dataInicio) throws ParseException {
 		List<String> listaDatas = new ArrayList<>();
 		listaDatas.add(DataManipulacao.AdicionarDias(dataInicio, 1));
-		for (int i = 0; i < 11; i++) {
+		for (int i = 1; i < 12; i++) {
 			listaDatas.add(DataManipulacao.AdicionarDias(dataInicio, i+1));
 		}
 		return listaDatas;

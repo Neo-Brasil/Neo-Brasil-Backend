@@ -33,7 +33,6 @@ public class PrestacoesFunc {
 			if (!ultimaPrestacao.getData_vencimento().substring(8).equalsIgnoreCase(
 					titulo.getData_vencimento().substring(8))) {
 				String dia = titulo.getData_vencimento().substring(8);
-				System.out.print("#"+dia+"@");
 				for (int i = prestacoes.size()-1; i>0; i--) {
 					if (prestacoes.get(i).getData_vencimento().substring(8).equalsIgnoreCase(dia)) {
 						novaPrestacao.setData_vencimento(
