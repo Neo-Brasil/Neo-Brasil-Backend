@@ -1,33 +1,17 @@
 package com.fatec.aplicacao.modelo;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class RelatorioValores {
-	private double receber;
+	private double emAberto;
 	
-	private double creditar;
+	private double pago;
 	
-	private double recebido;
+	private double creditado;
+	
+	private double atrasado;
 
-	public double getReceber() {
-		return receber;
-	}
-
-	public void setReceber(double receber) {
-		this.receber = receber;
-	}
-
-	public double getCreditar() {
-		return creditar;
-	}
-
-	public void setCreditar(double creditar) {
-		this.creditar = creditar;
-	}
-
-	public double getRecebido() {
-		return recebido;
-	}
-
-	public void setRecebido(double recebido) {
-		this.recebido = recebido;
-	}
 }

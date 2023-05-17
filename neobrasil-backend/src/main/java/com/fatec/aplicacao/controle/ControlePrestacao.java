@@ -93,19 +93,23 @@ public class ControlePrestacao {
 			}
 		}
 		RelatorioValores relatorio = new RelatorioValores();
-		double creditar = 0;
-		double recebido = 0;
-		double receber = 0;
+		double creditado = 0;
+		double pago = 0;
+		double emAberto = 0;
+		double atrasado = 0;
 		for (Prestacao prestacao : prestacoes) {
-			if (prestacao.getSituacao().equals("Creditado")) {
-				recebido = recebido + prestacao.getPreco();
+			if (prestacao.getSituacao().equals("Em aberto")) {
+				emAberto = emAberto + prestacao.getPreco();
+			}else if (prestacao.getSituacao().equals("Creditado")) {
+				creditado = creditado + prestacao.getPreco();
 			}else if (prestacao.getSituacao().equals("Pago")) {
-				creditar = creditar + prestacao.getPreco();
-			}else receber = receber + prestacao.getPreco();
+				pago = pago + prestacao.getPreco();
+			}else atrasado = atrasado + prestacao.getPreco();
 		}
-		relatorio.setCreditar(creditar);
-		relatorio.setReceber(receber);
-		relatorio.setRecebido(recebido);
+		relatorio.setCreditado(creditado);
+		relatorio.setPago(pago);
+		relatorio.setAtrasado(atrasado);
+		relatorio.setEmAberto(emAberto);
 		return relatorio;
 	}
 	
