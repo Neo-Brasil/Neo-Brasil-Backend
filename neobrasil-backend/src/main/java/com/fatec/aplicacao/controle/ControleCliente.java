@@ -47,7 +47,7 @@ public class ControleCliente {
 		List<Titulos> titulos = novoCliente.getTitulos();
 		for (Titulos titulo : titulos) {
 			List<Prestacao> prestacoes = titulo.getPrestacoes();
-			List<String> listaDatas = DataManipulacao.CriarDatas(titulo.getData_vencimento());
+			List<String> listaDatas = DataManipulacao.CriarDatas(titulo.getData_vencimento(), 12);
 			for (int i = 0; i < 12; i++) {
 				Prestacao prestacao = new Prestacao();
 				prestacao.setSituacao("Em aberto");
@@ -82,7 +82,7 @@ public class ControleCliente {
 	@SuppressWarnings("deprecation")
 	@PutMapping("/atualizar/{id}")
 	@PreAuthorize("hasAnyAuthority('ADM','COMERCIAL')")
-	public void atualizarCliente(@RequestBody Cliente atualizacao, @PathVariable long id) {
+	public void atualizarCliente(@RequestBody Cliente atualizacao, @PathVariable long id) throws ParseException {
 		Cliente cliente = repositorioCliente.getById(atualizacao.getId());
 		ClienteAtualizador atualizador = new ClienteAtualizador();
 		Relacao relacao = atualizador.atualizar(cliente, atualizacao);

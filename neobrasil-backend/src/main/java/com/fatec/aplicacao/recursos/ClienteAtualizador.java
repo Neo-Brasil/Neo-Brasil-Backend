@@ -1,5 +1,7 @@
 package com.fatec.aplicacao.recursos;
 
+import java.text.ParseException;
+
 import com.fatec.aplicacao.modelo.Cliente;
 import com.fatec.aplicacao.modelo.Relacao;
 
@@ -26,7 +28,7 @@ public class ClienteAtualizador {
 		
 	}
 
-	public Relacao atualizar(Cliente cliente, Cliente atualizacao) {
+	public Relacao atualizar(Cliente cliente, Cliente atualizacao) throws ParseException {
 		String acoes = "";
 		Relacao relacao = new Relacao();
 		String acoesCliente = atualizarDados(cliente, atualizacao);
