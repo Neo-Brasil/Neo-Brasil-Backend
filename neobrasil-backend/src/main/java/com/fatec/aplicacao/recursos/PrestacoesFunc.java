@@ -76,5 +76,37 @@ public class PrestacoesFunc {
 			}
 			return somaTotal;
 		}
+		
+		public static void atualizarPrestacoesData(Titulos titulo) throws ParseException {
+			List<Prestacao> prestacoesAntigas = titulo.getPrestacoes();
+			List<String> datas = DataManipulacao.CriarDatas(titulo.getData_vencimento(), prestacoesAntigas.size());
+			for (int i = 0; i < prestacoesAntigas.size(); i++ ) {
+				if (prestacoesAntigas.get(i).getSituacao().equalsIgnoreCase("Em aberto")){
+					prestacoesAntigas.get(i).setData_vencimento(datas.get(i));
+				}
+			}
+		}
+		
+		public static void atualizarPrestacoesPreco(Titulos titulo) {
+			List<Prestacao> prestacoesAntigas = titulo.getPrestacoes();
+			double preco = Math.round(titulo.getPreco()*100.0)/100.0;
+			for (int i = 0; i < prestacoesAntigas.size(); i++ ) {
+				if (prestacoesAntigas.get(i).getSituacao().equalsIgnoreCase("Em aberto")){
+					prestacoesAntigas.get(i).setPreco(preco);
+				}
+			}
+		}
+		
+		public static void atualizarPrestacoesPrecoData(Titulos titulo) throws ParseException {
+			List<Prestacao> prestacoesAntigas = titulo.getPrestacoes();
+			double preco = Math.round(titulo.getPreco()*100.0)/100.0;
+			List<String> datas = DataManipulacao.CriarDatas(titulo.getData_vencimento(), prestacoesAntigas.size());
+			for (int i = 0; i < prestacoesAntigas.size(); i++ ) {
+				if (prestacoesAntigas.get(i).getSituacao().equalsIgnoreCase("Em aberto")){
+					prestacoesAntigas.get(i).setPreco(preco);
+					prestacoesAntigas.get(i).setData_vencimento(datas.get(i));
+				}
+			}
+		}
 	}
 
