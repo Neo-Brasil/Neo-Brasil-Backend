@@ -26,10 +26,10 @@ public class DataManipulacao {
 		return data;
 	}
 
-	public static List<String> CriarDatas(String dataInicio) throws ParseException {
+	public static List<String> CriarDatas(String dataInicio, int quantidade) throws ParseException {
 		List<String> listaDatas = new ArrayList<>();
 		listaDatas.add(DataManipulacao.AdicionarMeses(dataInicio, 1));
-		for (int i = 1; i < 12; i++) {
+		for (int i = 1; i < quantidade; i++) {
 			listaDatas.add(DataManipulacao.AdicionarMeses(dataInicio, i+1));
 		}
 		return listaDatas;
