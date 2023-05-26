@@ -80,9 +80,9 @@ public class ControlePrestacao {
 		repositorioRelacao.save(relacao);
 	}
 	
-	@GetMapping("/listagem/prestacoes_valores/periodo/{data_inicio}/{data_final}")
+	@GetMapping("/listagem/prestacoes_valores/periodo/{data_inicio}/{data_final}/{filtro}")
 	@PreAuthorize("hasAnyAuthority('ADM','COMERCIAL', 'FINANCEIRO')")
-	public RelatorioValores relatorioValores(@PathVariable String data_inicio, @PathVariable String data_final) throws ParseException {
+	public RelatorioValores relatorioValores(@PathVariable String data_inicio, @PathVariable String data_final, @PathVariable String filtro) throws ParseException {
 		List<Titulos> titulos = repositorioTitulos.findAll();
 		List<Prestacao> prestacoes = new ArrayList<>();
 		if (data_final.equalsIgnoreCase("0000-00-00")) {
@@ -93,23 +93,55 @@ public class ControlePrestacao {
 			}
 		}
 		RelatorioValores relatorio = new RelatorioValores();
-		double creditado = 0;
-		double pago = 0;
-		double emAberto = 0;
-		double atrasado = 0;
-		for (Prestacao prestacao : prestacoes) {
-			if (prestacao.getSituacao().equals("Em aberto")) {
-				emAberto = emAberto + prestacao.getPreco();
-			}else if (prestacao.getSituacao().equals("Creditado")) {
-				creditado = creditado + prestacao.getPreco();
-			}else if (prestacao.getSituacao().equals("Pago")) {
-				pago = pago + prestacao.getPreco();
-			}else atrasado = atrasado + prestacao.getPreco();
+		
+		if (filtro.equalsIgnoreCase("Todas")) {
+			double creditado = 0;
+			double pago = 0;
+			double emAberto = 0;
+			double atrasado = 0;
+			for (Prestacao prestacao : prestacoes) {
+				if (prestacao.getSituacao().equals("Em aberto")) {
+					emAberto = emAberto + prestacao.getPreco();
+				}else if (prestacao.getSituacao().equals("Creditado")) {
+					creditado = creditado + prestacao.getPreco();
+				}else if (prestacao.getSituacao().equals("Pago")) {
+					pago = pago + prestacao.getPreco();
+				}else atrasado = atrasado + prestacao.getPreco();
+			}
+			relatorio.setCreditado(creditado);
+			relatorio.setPago(pago);
+			relatorio.setAtrasado(atrasado);
+			relatorio.setEmAberto(emAberto);
+			
 		}
-		relatorio.setCreditado(creditado);
-		relatorio.setPago(pago);
-		relatorio.setAtrasado(atrasado);
-		relatorio.setEmAberto(emAberto);
+		else if (filtro.equalsIgnoreCase("Vencimento")) {
+			double atrasado = 0;
+			for (Prestacao prestacao : prestacoes) {
+				if (prestacao.getSituacao().equals("Em aberto") || prestacao.getSituacao().equals("Inadimplente")) {
+					atrasado = atrasado + prestacao.getPreco();
+				}
+			}
+			relatorio.setAtrasado(atrasado);	
+		}
+		else if (filtro.equalsIgnoreCase("Pagamento")) {
+			double pago = 0;
+			for (Prestacao prestacao : prestacoes) {
+				if (prestacao.getSituacao().equals("Pago")) {
+					pago = pago + prestacao.getPreco();
+				}
+			}
+			relatorio.setPago(pago);
+		}
+		else {
+			double creditado = 0;
+			for (Prestacao prestacao : prestacoes) {
+				if (prestacao.getSituacao().equals("Creditado")) {
+					creditado = creditado + prestacao.getPreco();
+				}
+			}
+			relatorio.setCreditado(creditado);
+		}
+		
 		return relatorio;
 	}
 	
