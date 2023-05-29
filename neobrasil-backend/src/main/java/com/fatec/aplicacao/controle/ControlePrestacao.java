@@ -80,10 +80,12 @@ public class ControlePrestacao {
 		repositorioRelacao.save(relacao);
 	}
 	
-	@GetMapping("/listagem/prestacoes_valores/periodo/{data_inicio}/{data_final}/{filtro}")
+	@SuppressWarnings("deprecation")
+	@GetMapping("/listagem/prestacoes_valores/{id}/periodo/{data_inicio}/{data_final}/{filtro}")
 	@PreAuthorize("hasAnyAuthority('ADM','COMERCIAL', 'FINANCEIRO')")
-	public RelatorioValores relatorioValores(@PathVariable String data_inicio, @PathVariable String data_final, @PathVariable String filtro) throws ParseException {
-		List<Titulos> titulos = repositorioTitulos.findAll();
+	public RelatorioValores relatorioValores(@PathVariable long id, @PathVariable String data_inicio, @PathVariable String data_final, @PathVariable String filtro) throws ParseException {
+		Cliente cliente = repositorioCliente.getById(id);
+		List<Titulos> titulos = cliente.getTitulos();
 		List<Prestacao> prestacoes = new ArrayList<>();
 		if (data_final.equalsIgnoreCase("0000-00-00")) {
 			data_final = "9000-00-00";}
@@ -93,6 +95,7 @@ public class ControlePrestacao {
 			}
 		}
 		RelatorioValores relatorio = new RelatorioValores();
+		relatorio.setNomeCliente(cliente.getNome());
 		
 		if (filtro.equalsIgnoreCase("Todas")) {
 			double creditado = 0;

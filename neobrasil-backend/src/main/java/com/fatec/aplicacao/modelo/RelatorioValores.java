@@ -6,6 +6,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class RelatorioValores {
+	private String nomeCliente;
+	
 	private double emAberto;
 	
 	private double pago;
