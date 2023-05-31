@@ -50,6 +50,7 @@ public class ControleCliente {
 			List<String> listaDatas = DataManipulacao.CriarDatas(titulo.getData_vencimento(), 12);
 			for (int i = 0; i < 12; i++) {
 				Prestacao prestacao = new Prestacao();
+				prestacao.setIndice(i+1);
 				prestacao.setSituacao("Em aberto");
 				prestacao.setData_vencimento(listaDatas.get(i));
 				prestacao.setData_pagamento("0000-00-00");

@@ -41,6 +41,7 @@ public class PrestacoesFunc {
 					}
 				}
 			} else {novaPrestacao.setData_vencimento(DataManipulacao.AdicionarDias(ultimaPrestacao.getData_vencimento(), 1));}
+			novaPrestacao.setIndice(prestacoes.get(prestacoes.size()-1).getIndice() + 1);
 			novaPrestacao.setPreco(ultimaPrestacao.getPreco());
 			novaPrestacao.setSituacao("Em aberto");
 			novaPrestacao.setData_pagamento("0000-00-00");

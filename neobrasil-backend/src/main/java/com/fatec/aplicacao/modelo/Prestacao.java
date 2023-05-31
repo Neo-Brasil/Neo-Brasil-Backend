@@ -27,6 +27,8 @@ public class Prestacao {
 	@Column
 	private double preco;
 	@Column
+	private int indice;
+	@Column
 	private String situacao;
 	public Long getId() {
 		return Id;
