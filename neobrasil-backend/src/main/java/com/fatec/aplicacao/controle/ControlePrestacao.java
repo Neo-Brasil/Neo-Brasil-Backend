@@ -70,7 +70,13 @@ public class ControlePrestacao {
 		Prestacao prestacao = repositorioPrestacao.getById(prestacaoPaga.getId());
 		prestacao.setSituacao("Pago");
 		prestacao.setData_pagamento(prestacaoPaga.getData_pagamento());
-		
+		float valorPago = TituloPrestacaoPaga.getUltimo_valor_pago();
+		if (valorPago > TituloPrestacaoPaga.getPreco()) {
+			Prestacao parcelaSeguinte = TituloPrestacaoPaga.getPrestacoes().get(prestacaoPaga.getIndice()+1);
+			parcelaSeguinte.setPreco(TituloPrestacaoPaga.getPreco()-valorPago);
+			
+		}
+			
 		Relacao relacao = new Relacao();
 		relacao.setUsuario(repositorioUsuario.getById(id));
 		String acao = String.format("Pagamento da prestação de id %s ", prestacao.getId());
