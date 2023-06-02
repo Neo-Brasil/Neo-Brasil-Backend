@@ -3,11 +3,75 @@ package com.fatec.aplicacao.recursos;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.fatec.aplicacao.modelo.Cliente;
 import com.fatec.aplicacao.modelo.Prestacao;
+import com.fatec.aplicacao.modelo.RelatorioValores;
 import com.fatec.aplicacao.modelo.Titulos;
 
 
 public class PrestacoesFunc {
+	
+	public static RelatorioValores relatorioClienteTitulo(Cliente cliente, String data_inicio, String data_final, String filtro) throws ParseException {
+		List<Titulos> titulos = cliente.getTitulos();
+		List<Prestacao> prestacoes = new ArrayList<>();
+		if (data_final.equalsIgnoreCase("0000-00-00")) {
+			data_final = "9000-00-00";}
+		for (Titulos titulo : titulos) {
+			for (Prestacao prestacao : PrestacoesFunc.listarPrestacoesPeriodo(titulo, data_inicio, data_final)) {
+				prestacoes.add(prestacao);
+			}
+		}
+		RelatorioValores relatorio = new RelatorioValores();
+		relatorio.setNomeCliente(cliente.getNome());
+		if (filtro.equalsIgnoreCase("Todas")) {
+			double creditado = 0;
+			double pago = 0;
+			double emAberto = 0;
+			double atrasado = 0;
+			for (Prestacao prestacao : prestacoes) {
+				if (prestacao.getSituacao().equals("Em aberto")) {
+					emAberto = emAberto + prestacao.getPreco();
+				}else if (prestacao.getSituacao().equals("Creditado")) {
+					creditado = creditado + prestacao.getPreco();
+				}else if (prestacao.getSituacao().equals("Pago")) {
+					pago = pago + prestacao.getPreco();
+				}else atrasado = atrasado + prestacao.getPreco();
+			}
+			relatorio.setCreditado(creditado);
+			relatorio.setPago(pago);
+			relatorio.setAtrasado(atrasado);
+			relatorio.setEmAberto(emAberto);
+		}
+		else if (filtro.equalsIgnoreCase("Vencimento")) {
+			double atrasado = 0;
+			for (Prestacao prestacao : prestacoes) {
+				if (prestacao.getSituacao().equals("Em aberto") || prestacao.getSituacao().equals("Inadimplente")) {
+					atrasado = atrasado + prestacao.getPreco();
+				}
+			}
+			relatorio.setAtrasado(atrasado);	
+		}
+		else if (filtro.equalsIgnoreCase("Pagamento")) {
+			double pago = 0;
+			for (Prestacao prestacao : prestacoes) {
+				if (prestacao.getSituacao().equals("Pago")) {
+					pago = pago + prestacao.getPreco();
+				}
+			}
+			relatorio.setPago(pago);
+		}
+		else {
+			double creditado = 0;
+			for (Prestacao prestacao : prestacoes) {
+				if (prestacao.getSituacao().equals("Creditado")) {
+					creditado = creditado + prestacao.getPreco();
+				}
+			}
+			relatorio.setCreditado(creditado);
+		}
+		return relatorio;
+	}
 	
 	public static void atualizarTituloPrestacoes(Titulos titulo, int dataAtual) throws NumberFormatException, ParseException {
 		for (Prestacao prestacao: titulo.getPrestacoes()) {

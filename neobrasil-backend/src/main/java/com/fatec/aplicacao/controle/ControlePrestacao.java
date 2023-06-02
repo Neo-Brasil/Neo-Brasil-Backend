@@ -91,71 +91,24 @@ public class ControlePrestacao {
 	}
 	
 	@SuppressWarnings("deprecation")
-	@GetMapping("/listagem/prestacoes_valores/{id}/periodo/{data_inicio}/{data_final}/{filtro}")
+	@GetMapping("/listagem/prestacoes_valores/{id_lista}/periodo/{data_inicio}/{data_final}/{filtro}")
 	@PreAuthorize("hasAnyAuthority('ADM','COMERCIAL', 'FINANCEIRO')")
-	public RelatorioValores relatorioValores(@PathVariable long id, @PathVariable String data_inicio, @PathVariable String data_final, @PathVariable String filtro) throws ParseException {
-		Cliente cliente = repositorioCliente.getById(id);
-		List<Titulos> titulos = cliente.getTitulos();
-		List<Prestacao> prestacoes = new ArrayList<>();
-		if (data_final.equalsIgnoreCase("0000-00-00")) {
-			data_final = "9000-00-00";}
-		for (Titulos titulo : titulos) {
-			for (Prestacao prestacao : PrestacoesFunc.listarPrestacoesPeriodo(titulo, data_inicio, data_final)) {
-				prestacoes.add(prestacao);
+	public List<RelatorioValores> relatorioValores(@PathVariable long[] id_lista, @PathVariable String data_inicio, @PathVariable String data_final, @PathVariable String filtro) throws ParseException {
+		List<Cliente> clientes = new ArrayList<Cliente>();
+		if (id_lista.length == 0) {
+			clientes = repositorioCliente.findAll();
+		} else {
+			for (long id: id_lista) {
+				clientes.add(repositorioCliente.getById(id));
 			}
 		}
-		RelatorioValores relatorio = new RelatorioValores();
-		relatorio.setNomeCliente(cliente.getNome());
-		
-		if (filtro.equalsIgnoreCase("Todas")) {
-			double creditado = 0;
-			double pago = 0;
-			double emAberto = 0;
-			double atrasado = 0;
-			for (Prestacao prestacao : prestacoes) {
-				if (prestacao.getSituacao().equals("Em aberto")) {
-					emAberto = emAberto + prestacao.getPreco();
-				}else if (prestacao.getSituacao().equals("Creditado")) {
-					creditado = creditado + prestacao.getPreco();
-				}else if (prestacao.getSituacao().equals("Pago")) {
-					pago = pago + prestacao.getPreco();
-				}else atrasado = atrasado + prestacao.getPreco();
-			}
-			relatorio.setCreditado(creditado);
-			relatorio.setPago(pago);
-			relatorio.setAtrasado(atrasado);
-			relatorio.setEmAberto(emAberto);
-			
-		}
-		else if (filtro.equalsIgnoreCase("Vencimento")) {
-			double atrasado = 0;
-			for (Prestacao prestacao : prestacoes) {
-				if (prestacao.getSituacao().equals("Em aberto") || prestacao.getSituacao().equals("Inadimplente")) {
-					atrasado = atrasado + prestacao.getPreco();
-				}
-			}
-			relatorio.setAtrasado(atrasado);	
-		}
-		else if (filtro.equalsIgnoreCase("Pagamento")) {
-			double pago = 0;
-			for (Prestacao prestacao : prestacoes) {
-				if (prestacao.getSituacao().equals("Pago")) {
-					pago = pago + prestacao.getPreco();
-				}
-			}
-			relatorio.setPago(pago);
-		}
-		else {
-			double creditado = 0;
-			for (Prestacao prestacao : prestacoes) {
-				if (prestacao.getSituacao().equals("Creditado")) {
-					creditado = creditado + prestacao.getPreco();
-				}
-			}
-			relatorio.setCreditado(creditado);
+		List<RelatorioValores> relatorios = new ArrayList<RelatorioValores>();
+		for (Cliente cliente: clientes) {
+			relatorios.add(PrestacoesFunc.relatorioClienteTitulo(cliente, data_inicio, data_final, filtro));
 		}
 		
-		return relatorio;
+		
+		return relatorios;
 	}
 	
 	
