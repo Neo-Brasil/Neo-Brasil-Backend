@@ -93,9 +93,9 @@ public class ControlePrestacao {
 	@SuppressWarnings("deprecation")
 	@GetMapping("/listagem/prestacoes_valores/{id_lista}/periodo/{data_inicio}/{data_final}/{filtro}")
 	@PreAuthorize("hasAnyAuthority('ADM','COMERCIAL', 'FINANCEIRO')")
-	public List<RelatorioValores> relatorioValores(@PathVariable long[] id_lista, @PathVariable String data_inicio, @PathVariable String data_final, @PathVariable String filtro) throws ParseException {
+	public List<RelatorioValores> relatorioValores(@PathVariable List<Integer> id_lista, @PathVariable String data_inicio, @PathVariable String data_final, @PathVariable String filtro) throws ParseException {
 		List<Cliente> clientes = new ArrayList<Cliente>();
-		if (id_lista.length == 0) {
+		if (id_lista.get(0) == 0) {
 			clientes = repositorioCliente.findAll();
 		} else {
 			for (long id: id_lista) {
