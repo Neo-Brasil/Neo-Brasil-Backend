@@ -43,23 +43,18 @@ public class PrestacoesFunc {
 			relatorio.setAtrasado(atrasado);
 			relatorio.setEmAberto(emAberto);
 		}
-		else if (filtro.equalsIgnoreCase("Em aberto")) {
+		else if (filtro.equalsIgnoreCase("Vencimento")) {
+			double atrasado = 0;
 			double emAberto = 0;
 			for (Prestacao prestacao : prestacoes) {
 				if (prestacao.getSituacao().equals("Em aberto")) {
 					emAberto = emAberto + prestacao.getPreco();
-				}
-			}
-			relatorio.setAtrasado(emAberto);	
-		}
-		else if (filtro.equalsIgnoreCase("Vencimento")) {
-			double atrasado = 0;
-			for (Prestacao prestacao : prestacoes) {
-				if (prestacao.getSituacao().equals("Inadimplente")) {
+				}else if (prestacao.getSituacao().equals("Inadimplente")) {
 					atrasado = atrasado + prestacao.getPreco();
 				}
 			}
-			relatorio.setAtrasado(atrasado);	
+			relatorio.setAtrasado(atrasado);
+			relatorio.setEmAberto(emAberto);
 		}
 		else if (filtro.equalsIgnoreCase("Pagamento")) {
 			double pago = 0;
