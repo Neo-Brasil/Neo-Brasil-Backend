@@ -11,14 +11,18 @@ public class PrestacaoAtualizador {
 	public String atualizar(Prestacao prestacao, Prestacao atualizacao) {
 		String acoes = "";
 		if (atualizacao != null) {
-			acoes = String.format("Atualizações na prestação de id %s: ", prestacao.getId()) ;
+			acoes = String.format("Atualizações na prestação de id %d: ", prestacao.getId()) ;
 			if (!verificador.verificar(atualizacao.getSituacao())) {
 				acoes += String.format(" / Atualização no status da prestação de %s, para %s", prestacao.getSituacao(), atualizacao.getSituacao());
 				prestacao.setSituacao(atualizacao.getSituacao());
 			}
 			if (!intVerificador.verificar(atualizacao.getPreco())) {
-				acoes += String.format(" / Atualização no preço do titulo de %s, para %s", prestacao.getPreco(), atualizacao.getPreco());
+				acoes += String.format(" / Atualização no preço da prestação de %f, para %f", prestacao.getPreco(), atualizacao.getPreco());
 				prestacao.setPreco(atualizacao.getPreco());
+			}
+			if (!intVerificador.verificar(atualizacao.getValorPago())) {
+				acoes += String.format(" / Atualização no valor pago da prestação de %f, para %f", prestacao.getValorPago(), atualizacao.getValorPago());
+				prestacao.setPreco(atualizacao.getValorPago());
 			}
 			if (!verificador.verificar(atualizacao.getData_pagamento())) {
 				acoes += String.format(" / Atualização da data de pagamento da prestação de %s, para %s", prestacao.getData_pagamento(), atualizacao.getData_pagamento());

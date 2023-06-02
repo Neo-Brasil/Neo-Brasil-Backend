@@ -14,33 +14,32 @@ public class TituloAtualizador {
 		boolean mudancaPreco = false;
 		boolean mudancaData = false;
 		if (atualizacao != null) {
-			acoes = String.format(" / Atualizações no titulo de id %s: ", titulo.getId());
+			acoes = String.format(" / Atualizações no titulo de id %d: ", titulo.getId());
 			if (!verificador.verificar(atualizacao.getData_vencimento())) {
-				acoes += String.format(" / Atualização na data de vencimento do titulo do cliente de %s, para %s", titulo.getData_vencimento(), atualizacao.getData_vencimento());
+				acoes += String.format(" / Atualização na data de vencimento de %d, para %d", titulo.getData_vencimento(), atualizacao.getData_vencimento());
 				titulo.setData_vencimento(atualizacao.getData_vencimento());
 				mudancaData = true;
-
 			}
 			if (!verificador.verificar(atualizacao.getTitulo())) {
-				acoes += String.format(" / Atualização no nome do titulo  do cliente de %s, para %s", titulo.getTitulo(), atualizacao.getTitulo());
+				acoes += String.format(" / Atualização no nome do titulo de %s, para %s", titulo.getTitulo(), atualizacao.getTitulo());
 				titulo.setTitulo(atualizacao.getTitulo());
 			}
 			if (!intVerificador.verificar(atualizacao.getPreco())) {
-				acoes += String.format(" / Atualização no preco do titulo do cliente de %s, para %s", titulo.getPreco(), atualizacao.getPreco());
+				acoes += String.format(" / Atualização no preco de %f, para %f", titulo.getPreco(), atualizacao.getPreco());
 				titulo.setPreco(atualizacao.getPreco());
 				mudancaPreco = true;
 			}
 			if (!intVerificador.verificar(atualizacao.getTempo_credito())) {
-				acoes += String.format(" / Atualização no tempo de creditado do titulo do cliente de %s, para %s", titulo.getTempo_credito(), atualizacao.getTempo_credito());
+				acoes += String.format(" / Atualização no tempo de credito do titulo de %d, para %d", titulo.getTempo_credito(), atualizacao.getTempo_credito());
 				titulo.setTempo_credito(atualizacao.getTempo_credito());
 			}
 			if (mudancaPreco && mudancaData) {PrestacoesFunc.atualizarPrestacoesPrecoData(titulo);}
 			else if (mudancaData) {PrestacoesFunc.atualizarPrestacoesData(titulo);}
 			else {PrestacoesFunc.atualizarPrestacoesPreco(titulo);}
 		}
-		return acoes;
-		
+	return acoes;
 	}
+	
 	
 	public String atualizar(List<Titulos> titulos, List<Titulos> atualizacoes) throws ParseException {
 		String acoes = "";
