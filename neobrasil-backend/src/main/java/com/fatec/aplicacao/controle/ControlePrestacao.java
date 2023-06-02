@@ -67,13 +67,17 @@ public class ControlePrestacao {
 	@PreAuthorize("hasAnyAuthority('ADM','FINANCEIRO')")
 	public void pagarPrestacao(@RequestBody Titulos TituloPrestacaoPaga, @PathVariable long id) throws ParseException {
 		Prestacao prestacaoPaga = TituloPrestacaoPaga.getPrestacoes().get(0);
+		Titulos titulo = repositorioTitulos.getById(TituloPrestacaoPaga.getId());
 		Prestacao prestacao = repositorioPrestacao.getById(prestacaoPaga.getId());
 		prestacao.setSituacao("Pago");
 		prestacao.setData_pagamento(prestacaoPaga.getData_pagamento());
-		float valorPago = TituloPrestacaoPaga.getUltimo_valor_pago();
-		if (valorPago > TituloPrestacaoPaga.getPreco()) {
-			Prestacao parcelaSeguinte = TituloPrestacaoPaga.getPrestacoes().get(prestacaoPaga.getIndice()+1);
-			parcelaSeguinte.setPreco(TituloPrestacaoPaga.getPreco()-valorPago);
+		float valorPago = prestacaoPaga.getValorPago();
+		prestacao.setValorPago(valorPago);
+		float valorParcela = prestacaoPaga.getPreco();
+		if (valorPago > valorParcela) {
+			Prestacao parcelaSeguinte = titulo.getPrestacoes().get((prestacaoPaga.getIndice()));
+			float diferenca = valorPago-parcelaSeguinte.getPreco();
+			parcelaSeguinte.setPreco(prestacao.getPreco()-diferenca);
 			
 		}
 			

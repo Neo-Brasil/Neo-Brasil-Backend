@@ -34,8 +34,6 @@ public class Titulos {
 	@Column
 	private String data_vencimento;
 	@Column
-	private int ultimo_valor_pago;
-	@Column
 	private int tempo_credito;
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	private List<Prestacao> prestacoes = new ArrayList<>();

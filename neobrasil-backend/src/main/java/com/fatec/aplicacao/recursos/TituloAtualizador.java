@@ -30,12 +30,8 @@ public class TituloAtualizador {
 				titulo.setPreco(atualizacao.getPreco());
 				mudancaPreco = true;
 			}
-			if (!intVerificador.verificar(atualizacao.getUltimo_valor_pago())) {
-				acoes += String.format(" / Atualização no ultimo valor pago do titulo do cliente de %s, para %s", titulo.getUltimo_valor_pago(), atualizacao.getUltimo_valor_pago());
-				titulo.setUltimo_valor_pago(atualizacao.getUltimo_valor_pago());
-			}
 			if (!intVerificador.verificar(atualizacao.getTempo_credito())) {
-				acoes += String.format(" / Atualização no tempo de creditado do titulo do cliente de %s, para %s", titulo.getUltimo_valor_pago(), atualizacao.getUltimo_valor_pago());
+				acoes += String.format(" / Atualização no tempo de creditado do titulo do cliente de %s, para %s", titulo.getTempo_credito(), atualizacao.getTempo_credito());
 				titulo.setTempo_credito(atualizacao.getTempo_credito());
 			}
 			if (mudancaPreco && mudancaData) {PrestacoesFunc.atualizarPrestacoesPrecoData(titulo);}
