@@ -3,11 +3,6 @@ package com.fatec.aplicacao.insert.banco;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import com.fatec.aplicacao.modelo.Cliente;
-import com.fatec.aplicacao.modelo.Endereco;
-import com.fatec.aplicacao.modelo.Prestacao;
-import com.fatec.aplicacao.modelo.Titulos;
 import com.fatec.aplicacao.modelo.Usuario;
 import com.fatec.aplicacao.repositorio.RepositorioCliente;
 import com.fatec.aplicacao.repositorio.RepositorioUsuario;

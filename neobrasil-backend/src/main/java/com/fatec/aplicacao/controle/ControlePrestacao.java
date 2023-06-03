@@ -75,19 +75,40 @@ public class ControlePrestacao {
 		prestacao.setValorPago(valorPago);
 		float valorParcela = prestacaoPaga.getPreco();
 		if (valorPago > valorParcela) {
-			Prestacao parcelaSeguinte = titulo.getPrestacoes().get((prestacaoPaga.getIndice()));
-			float diferenca = valorPago-parcelaSeguinte.getPreco();
-			parcelaSeguinte.setPreco(prestacao.getPreco()-diferenca);
-			
+			relacaoPrestacaoPaga(id, prestacaoPaga.getId());
+			int prestacoesNovas = 1;
+			float diferenca = valorPago-prestacaoPaga.getPreco();
+			for (Prestacao pre : titulo.getPrestacoes()) {
+				if (pre.getIndice() > prestacaoPaga.getIndice()) {
+					if (diferenca >= pre.getPreco()) { 
+						prestacoesNovas += 1;
+						System.out.print(pre.getIndice());
+						pre.setValorPago(diferenca);
+						diferenca -= pre.getPreco();
+						pre.setSituacao("Pago");
+						pre.setData_pagamento(prestacaoPaga.getData_pagamento());
+						repositorioPrestacao.save(pre);
+						relacaoPrestacaoPaga(id, pre.getId());
+					}
+					else {
+						pre.setPreco(pre.getPreco()-diferenca);
+						repositorioPrestacao.save(pre);
+						break;
+					}
+					
+				}
+			}
+			if (prestacoesNovas > 0) {
+				for (int i = 0; i < prestacoesNovas; i++) {
+					repositorioTitulos.save(PrestacoesFunc.criarNovaPrestacao(repositorioTitulos.getById(TituloPrestacaoPaga.getId())));
+				}
+			}
 		}
-			
-		Relacao relacao = new Relacao();
-		relacao.setUsuario(repositorioUsuario.getById(id));
-		String acao = String.format("Pagamento da prestação de id %s ", prestacao.getId());
-		relacao.setAcao(acao);
-		repositorioPrestacao.save(prestacao);
-		repositorioTitulos.save(PrestacoesFunc.criarNovaPrestacao(repositorioTitulos.getById(TituloPrestacaoPaga.getId())));
-		repositorioRelacao.save(relacao);
+		else {
+			repositorioPrestacao.save(prestacao);
+			repositorioTitulos.save(PrestacoesFunc.criarNovaPrestacao(repositorioTitulos.getById(TituloPrestacaoPaga.getId())));
+			relacaoPrestacaoPaga(id, prestacaoPaga.getId());
+		}
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -140,6 +161,15 @@ public class ControlePrestacao {
 		relacao.setAcao(acoes);
 		relacao.setUsuario(repositorioUsuario.getById(id));
 		repositorioPrestacao.save(prestacao);
+		repositorioRelacao.save(relacao);
+	}
+	
+	@SuppressWarnings("deprecation")
+	public void relacaoPrestacaoPaga(long id_usuario, long id_prestacao) {
+		Relacao relacao = new Relacao();
+		relacao.setUsuario(repositorioUsuario.getById(id_usuario));
+		String acao = String.format("Pagamento da prestação de id %s ", id_prestacao);
+		relacao.setAcao(acao);
 		repositorioRelacao.save(relacao);
 	}
 	

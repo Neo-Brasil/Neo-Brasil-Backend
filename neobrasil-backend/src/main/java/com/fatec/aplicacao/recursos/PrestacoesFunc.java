@@ -10,6 +10,7 @@ import com.fatec.aplicacao.modelo.RelatorioValores;
 import com.fatec.aplicacao.modelo.Titulos;
 
 
+
 public class PrestacoesFunc {
 	
 	public static RelatorioValores relatorioClienteTitulo(Cliente cliente, String data_inicio, String data_final, String filtro) throws ParseException {
@@ -175,5 +176,6 @@ public class PrestacoesFunc {
 				}
 			}
 		}
+		
 	}
 
