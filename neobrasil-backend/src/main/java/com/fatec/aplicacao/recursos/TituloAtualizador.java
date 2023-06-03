@@ -16,7 +16,7 @@ public class TituloAtualizador {
 		if (atualizacao != null) {
 			acoes = String.format(" / Atualizações no titulo de id %d: ", titulo.getId());
 			if (!verificador.verificar(atualizacao.getData_vencimento())) {
-				acoes += String.format(" / Atualização na data de vencimento de %d, para %d", titulo.getData_vencimento(), atualizacao.getData_vencimento());
+				acoes += String.format(" / Atualização na data de vencimento de %s, para %s", titulo.getData_vencimento(), atualizacao.getData_vencimento());
 				titulo.setData_vencimento(atualizacao.getData_vencimento());
 				mudancaData = true;
 			}

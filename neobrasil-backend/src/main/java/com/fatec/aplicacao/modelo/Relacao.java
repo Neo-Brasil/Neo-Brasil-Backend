@@ -22,7 +22,7 @@ public class Relacao {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@EqualsAndHashCode.Include
 	private Long id;
-	@Column
+	@Column(columnDefinition = "longtext")
 	private String acao;
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	private Usuario usuario;
