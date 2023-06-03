@@ -65,17 +65,22 @@ public class ControleTitulos {
 	}
 	
 	@SuppressWarnings("deprecation")
-	@DeleteMapping("/excluir/titulo/{id}/{id_usuario}")
+	@DeleteMapping("/excluir/titulo/{id_cliente}/{id}/{id_usuario}")
 	@PreAuthorize("hasAnyAuthority('ADM','COMERCIAL')")
-	public void excluirTitulo(@PathVariable long id,@PathVariable long id_usuario) {
-		Titulos titulo = repositorioTitulos.getById(id);
-		Relacao relacao = new Relacao();
-		relacao.setUsuario(repositorioUsuario.getById(id_usuario));
-		String acao = String.format("Exclusão do titulo %s",titulo.getTitulo());
-		relacao.setAcao(acao);	
-		repositorioTitulos.delete(titulo);
-		repositorioRelacao.save(relacao);
-		
+	public void excluirTitulo(@PathVariable long id_cliente, @PathVariable long id,@PathVariable long id_usuario) {
+		Cliente cliente = repositorioCliente.getById(id_cliente);
+		for (Titulos titulo: cliente.getTitulos()) {
+			if (titulo.getId()==id){
+				Relacao relacao = new Relacao();
+				relacao.setUsuario(repositorioUsuario.getById(id_usuario));
+				String acao = String.format("Exclusão do titulo %s",titulo.getTitulo());
+				relacao.setAcao(acao);	
+				repositorioRelacao.save(relacao);
+				cliente.getTitulos().remove(titulo);
+				repositorioCliente.save(cliente);
+				break;
+			}
+		}
 	}
 
 }
