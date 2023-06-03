@@ -42,7 +42,12 @@ public class ControleTitulos {
 		List<Titulos> titulos = cliente.getTitulos();
 		titulos.addAll(novoTitulo.getTitulos());
 		cliente.setTitulos(titulos);
+		Relacao relacao = new Relacao();
+		relacao.setUsuario(repositorioUsuario.getById(id_usuario));
+		String acao = String.format("Cadastro do titulo %s, no cliente %s",novoTitulo.getTitulos().get(0).getTitulo(), novoTitulo.getNome());
+		relacao.setAcao(acao);
 		repositorioCliente.save(cliente);
+		repositorioRelacao.save(relacao);
 	}
 	
 	@GetMapping("/listagem/titulos")
