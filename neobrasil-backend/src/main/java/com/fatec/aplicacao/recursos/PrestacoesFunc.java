@@ -105,11 +105,11 @@ public class PrestacoesFunc {
 				for (int i = prestacoes.size()-1; i>0; i--) {
 					if (prestacoes.get(i).getData_vencimento().substring(8).equalsIgnoreCase(dia)) {
 						novaPrestacao.setData_vencimento(
-						DataManipulacao.AdicionarDias(prestacoes.get(i).getData_vencimento(), prestacoes.size()-i)
+						DataManipulacao.AdicionarMeses(prestacoes.get(i).getData_vencimento(), prestacoes.size()-i)
 						);
 					}
 				}
-			} else {novaPrestacao.setData_vencimento(DataManipulacao.AdicionarDias(ultimaPrestacao.getData_vencimento(), 1));}
+			} else {novaPrestacao.setData_vencimento(DataManipulacao.AdicionarMeses(ultimaPrestacao.getData_vencimento(), 1));}
 			novaPrestacao.setIndice(prestacoes.get(prestacoes.size()-1).getIndice() + 1);
 			novaPrestacao.setPreco(ultimaPrestacao.getPreco());
 			novaPrestacao.setSituacao("Em aberto");
