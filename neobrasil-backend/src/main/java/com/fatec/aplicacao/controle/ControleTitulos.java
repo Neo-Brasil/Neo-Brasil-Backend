@@ -1,5 +1,6 @@
 package com.fatec.aplicacao.controle;
 
+import java.text.ParseException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fatec.aplicacao.modelo.Cliente;
+import com.fatec.aplicacao.modelo.Prestacao;
 import com.fatec.aplicacao.modelo.Relacao;
 import com.fatec.aplicacao.modelo.Titulos;
+import com.fatec.aplicacao.recursos.DataManipulacao;
 import com.fatec.aplicacao.recursos.Selecionador;
 import com.fatec.aplicacao.repositorio.RepositorioCliente;
 import com.fatec.aplicacao.repositorio.RepositorioRelacao;
@@ -37,9 +40,22 @@ public class ControleTitulos {
 	@SuppressWarnings("deprecation")
 	@PostMapping("/cadastrar/titulos/{id_usuario}")
 	@PreAuthorize("hasAnyAuthority('ADM','COMERCIAL', 'FINANCEIRO')")
-	public void cadastrarTitulo(@RequestBody Cliente novoTitulo, @PathVariable long id_usuario){
+	public void cadastrarTitulo(@RequestBody Cliente novoTitulo, @PathVariable long id_usuario) throws ParseException{
 		Cliente cliente = repositorioCliente.getById(novoTitulo.getId());
 		List<Titulos> titulos = cliente.getTitulos();
+		for (Titulos titulo : titulos) {
+			List<Prestacao> prestacoes = titulo.getPrestacoes();
+			List<String> listaDatas = DataManipulacao.CriarDatas(titulo.getData_vencimento(), 12);
+			for (int i = 0; i < 12; i++) {
+				Prestacao prestacao = new Prestacao();
+				prestacao.setIndice(i+1);
+				prestacao.setSituacao("Em aberto");
+				prestacao.setData_vencimento(listaDatas.get(i));
+				prestacao.setData_pagamento("0000-00-00");
+				prestacao.setPreco(titulo.getPreco());
+				prestacoes.add(prestacao);
+			}
+		}
 		titulos.addAll(novoTitulo.getTitulos());
 		cliente.setTitulos(titulos);
 		Relacao relacao = new Relacao();
