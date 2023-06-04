@@ -43,7 +43,7 @@ public class ControleTitulos {
 	public void cadastrarTitulo(@RequestBody Cliente novoTitulo, @PathVariable long id_usuario) throws ParseException{
 		Cliente cliente = repositorioCliente.getById(novoTitulo.getId());
 		List<Titulos> titulos = cliente.getTitulos();
-		for (Titulos titulo : titulos) {
+		for (Titulos titulo : novoTitulo.getTitulos()) {
 			List<Prestacao> prestacoes = titulo.getPrestacoes();
 			List<String> listaDatas = DataManipulacao.CriarDatas(titulo.getData_vencimento(), 12);
 			for (int i = 0; i < 12; i++) {
